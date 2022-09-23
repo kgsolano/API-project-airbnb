@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-      "install": "npm --prefix backend install backend",
+    "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/kgsolano/API-project/issues"
   },
-  "homepage": "https://github.com/kgsolano/API-project#readme"
+  "homepage": "https://github.com/kgsolano/API-project#readme",
+  "dependencies": {
+    "pg": "^8.8.0"
+  }
 }
