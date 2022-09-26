@@ -6,7 +6,11 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {model: 'Bookings'},
+        references: {model: 'Reviews'},
+        references: {model: 'Users'},
+        references: {model: 'SpotImages'}
       },
       ownerId: {
         type: Sequelize.INTEGER,
