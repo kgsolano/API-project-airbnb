@@ -7,17 +7,17 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        references: {model: 'ReviewImages'}
+        // references: {model: 'ReviewImages'}
       },
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {model: 'Spots'}
+        // references: {model: 'Spots'}
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {model: 'Users'}
+        // references: {model: 'Users'}
       },
       review: {
         type: Sequelize.STRING,

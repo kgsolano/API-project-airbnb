@@ -7,14 +7,14 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Bookings" },
-        references: { model: "Reviews" },
-        references: { model: "SpotImages" },
+        // references: { model: "Bookings" },
+        // references: { model: "Reviews" },
+        // references: { model: "SpotImages" },
       },
       ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Users" }
+        // references: { model: "Users" }
       },
       address: {
         type: Sequelize.STRING,

@@ -7,9 +7,9 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Bookings" },
-        references: { model: "Spots" },
-        references: { model: "Reviews" },
+        // references: { model: "Bookings" },
+        // references: { model: "Spots" },
+        // references: { model: "Reviews" },
       },
       username: {
         type: Sequelize.STRING(30),
