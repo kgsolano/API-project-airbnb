@@ -120,6 +120,26 @@ router.get("/", async (req, res, next) => {
   res.json(resBody);
 })
 
+router.put("/:spotId", requireAuth, async (req, res, next) => {
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+  spot.update({
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+  });
+
+  res.json(spot)
+})
+
 //creating a spot
 router.post("/", requireAuth, async (req, res, next) => {
     
@@ -199,6 +219,24 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 
   }
 
+})
+
+router.delete("/:spotId", requireAuth, async (req, res, next) => {
+  if(req.user.id !== Spot.ownerId){
+    res.json({
+      message: "Spot could not be found",
+      statusCode: 404
+    })
+  
+     const removeSpot = await Spot.findByPk(req.params.spotId);
+
+     await removeSpot.destroy();
+
+     res.json({
+       message: "Successfully Deleted",
+       statusCode: 200,
+     });
+}
 })
 
 module.exports = router
