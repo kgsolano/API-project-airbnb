@@ -9,7 +9,18 @@ const {
 const { User, Spot, Review, SpotImage, sequelize } = require("../../db/models");
 const { handleValidationErrors } = require("../../utils/validation");
 const { check } = require("express-validator");
+const { user } = require("pg/lib/defaults");
 
+
+router.get("/current", requireAuth, async (req, res, next) => {
+  let userSpot = await Spot.findAll({
+    where: {
+      ownerId: req.user.id
+    }
+  })
+
+  res.json(userSpot)
+})
 
 router.get("/", async (req, res, next) => {
   let spots = await Spot.findAll({
@@ -74,10 +85,11 @@ router.get("/", async (req, res, next) => {
     })
 })
 
+//creating a spot
 router.post("/", requireAuth, async (req, res, next) => {
     
   const {
-    
+      
       address,
       city,
       state,
@@ -89,7 +101,7 @@ router.post("/", requireAuth, async (req, res, next) => {
       price } = req.body
 
     const newSpot = await Spot.create({
-      
+      ownerId: req.user.id,
       address,
       city,
       state,
@@ -123,6 +135,37 @@ router.post("/", requireAuth, async (req, res, next) => {
 
     res.status = 201
     res.json(newSpot)
+})
+
+router.post("/:spotId/images", requireAuth, async (req, res, next) => {
+  const { url, preview } = req.body
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  // console.log(spot)
+
+  //if the user matches the spot's owner id
+  if(!spot) {
+
+    res.status = 404
+    res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": res.status
+    }) 
+
+      } else if (req.user.id !== spot.ownerId){
+      res.json({"message": "user does not match"})
+    } else {
+
+    const newImage = await SpotImage.create({
+      spotId: spot.id, url, preview
+    })
+    console.log(newImage)
+    res.json(newImage)
+
+  }
+  
+  
+
 })
 
 module.exports = router
