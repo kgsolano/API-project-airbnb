@@ -101,7 +101,7 @@ router.post("/", requireAuth, async (req, res, next) => {
       price,
     });
 
-    // console.log(newSpot)
+    // console.log(newSpot).
     // if(!newSpot) {
     //     res.status = 400
     //     res.json({

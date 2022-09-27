@@ -1,4 +1,5 @@
 {
+
   "name": "api-project-airbnb",
   "version": "1.0.0",
   "description": "![kylesolano-airbnb-schema](https://user-images.githubusercontent.com/95837496/191597907-6cb16c64-f875-404e-805a-d8910be98f26.png)",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {},
    "scripts": {
+
     "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
@@ -30,13 +32,17 @@
   },
   "repository": {
     "type": "git",
+
     "url": "git+https://github.com/kgsolano/API-project-airbnb.git"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
+
     "url": "https://github.com/kgsolano/API-project-airbnb/issues"
   },
   "homepage": "https://github.com/kgsolano/API-project-airbnb#readme"
+
 }
