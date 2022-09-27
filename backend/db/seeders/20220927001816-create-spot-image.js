@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "spotImages",
+      "SpotImages",
       [
         {
           spotId: 1,
