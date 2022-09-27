@@ -1,6 +1,7 @@
 'use strict';
 const {
-  Model
+  Model,
+  SpotImages
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
@@ -18,22 +19,47 @@ module.exports = (sequelize, DataTypes) => {
 
     }
   }
-  Spot.init({
-    ownerId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.DECIMAL,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Spot',
-  });
+  Spot.init(
+    {
+      ownerId: DataTypes.INTEGER,
+      address: DataTypes.STRING,
+      city: DataTypes.STRING,
+      state: DataTypes.STRING,
+      country: DataTypes.STRING,
+      lat: DataTypes.DECIMAL,
+      lng: DataTypes.DECIMAL,
+      name: DataTypes.STRING,
+      description: DataTypes.STRING,
+      price: DataTypes.DECIMAL,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: "Spot",
+      // defaultScope: {
+      //   attributes: {
+      //     include: {model: SpotImages},
+      //     attributes: [
+      //       "id",
+      //       "ownerId",
+      //       "address",
+      //       "city",
+      //       "state",
+      //       "country",
+      //       "lat",
+      //       "lng",
+      //       "name",
+      //       "description",
+      //       "price",
+      //       "createAt",
+      //       "updatedAt",
+      //       "avgRating",
+      //       [SpotImages.url, "previewImage"],
+      //     ],
+      //   },
+      // },           COME BACK TO THIS TO ALIAS PREVIEWIMG
+    }
+  );
   return Spot;
 };
