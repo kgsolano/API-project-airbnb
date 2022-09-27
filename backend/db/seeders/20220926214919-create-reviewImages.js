@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "ReviewImage",
+      "ReviewImages",
       [
         {
           reviewId: 1,
@@ -34,7 +34,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(
-      "ReviewImage",
+      "ReviewImages",
       {
         reviewId: {
           [Op.in]: [1, 2, 3, 4, 5],
