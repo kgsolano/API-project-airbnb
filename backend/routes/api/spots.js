@@ -121,7 +121,7 @@ router.get("/", async (req, res, next) => {
 })
 
 router.put("/:spotId", requireAuth, async (req, res, next) => {
-  const spot = await Spot.findByPk(req.params.spotId)
+  const spot = await Spot.scope("includeEdits").findByPk(req.params.spotId)
 
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
 

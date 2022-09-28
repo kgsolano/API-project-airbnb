@@ -14,12 +14,20 @@ module.exports = (sequelize, DataTypes) => {
       ReviewImage.belongsTo(models.Review, {foreignKey: 'reviewId'})
     }
   }
-  ReviewImage.init({
-    reviewId: DataTypes.INTEGER,
-    url: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'ReviewImage',
-  });
+  ReviewImage.init(
+    {
+      reviewId: DataTypes.INTEGER,
+      url: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "ReviewImage",
+      defaultScope: {
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    }
+  );
   return ReviewImage;
 };
