@@ -13,7 +13,35 @@ const { user } = require("pg/lib/defaults");
 const review = require("../../db/models/review");
 
 // get all reviews of the current user
+router.get("/current", requireAuth, async (req, res, next) => {
 
+    const resBody = {}
+    const reviews = await Review.findAll({
+        where: {
+            userId: req.user.id
+        },
+        include:[
+            {model: User},
+            {model: Spot},
+            {model: ReviewImage}
+        ]
+    })
+
+    for (rev of reviews) {
+        const reviewImg = await SpotImage.findOne({
+            where: {preview: true,
+            spotId: rev.Spot.dataValues.id
+            },
+            attributes: ['url'],
+            raw: true
+        })
+        rev.Spot.dataValues.previewImage = reviewImg.url
+       
+    }
+
+    
+    res.json(reviews)
+})
 
 // add an image to a review
 router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
