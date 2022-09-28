@@ -142,15 +142,38 @@ router.get("/:spotId", async (req, res, next) => {
 })
 
 router.get("/", async (req, res, next) => {
-  let resBody = {}
-  resBody.spots = await Spot.findAll({
-    raw: true
-  })
+  
 
-  for (let i = 0; i < resBody.spots.length; i++) {
-    let currentSpot = resBody.spots[i];
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
+    req.query;
+
+  page = parseInt(page);
+  size = parseInt(size);
+
+  if (!page) page = 1;
+  if (page > 10) page = 10;
+
+  if (!size) size = 20;
+  if (size > 20) size = 20;
+
+  const pagination = {};
+  if (page >= 1 && size >= 1) {
+    pagination.offset = size * (page - 1);
+    pagination.limit = size;
+  }
+
+  
+  Spots = await Spot.findAll({
+    ...pagination,
+    raw: true
+  });
+
+  for (let i = 0; i < Spots.length; i++) {
+    let currentSpot = Spots[i];
     const avgRating = await Review.findAll({
-      where: { spotId: currentSpot.id },
+      where: { 
+        spotId: currentSpot.id
+    },
       attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
       raw: true,
     });
@@ -173,7 +196,12 @@ router.get("/", async (req, res, next) => {
       newArr.length ? (currentSpot.previewImage = newArr) : null;
     }
   }
-  res.json(resBody);
+
+
+
+  res.json({Spots: Spots, 
+    page: page,
+    size: size});
 })
 
 router.put("/:spotId", requireAuth, async (req, res, next) => {
