@@ -49,6 +49,45 @@ router.get("/current", requireAuth, async (req, res, next) => {
   res.json(resBody);
 });
 
+router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const currentSpot = await Spot.findByPk(req.params.spotId)
+
+  if(!currentSpot){
+    res.statusCode = 404
+    return res.json({
+  "message": "Spot couldn't be found",
+  "statusCode": 404
+    })
+  }
+  
+  if(req.user.id !== currentSpot.ownerId){
+    const differentBookings = await Booking.findAll({
+      where: {
+        spotId: currentSpot.id
+      }
+    })
+    return res.json({
+      bookings: differentBookings})
+  }
+
+  if(req.user.id === currentSpot.ownerId){
+    const userBooking = await Booking.findAll({
+      where: {
+        spotId: currentSpot.id
+      },
+      include: [
+        {model: User}
+      ]
+    })
+
+    return res.json({
+      bookings: userBooking
+    })
+  }
+
+
+})
+
 router.get("/:spotId/reviews", async (req, res, next) => {
   const reviews = await Review.findAll({
     where: {

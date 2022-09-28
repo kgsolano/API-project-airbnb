@@ -15,14 +15,22 @@ module.exports = (sequelize, DataTypes) => {
       Booking.belongsTo(models.User, { foreignKey: "SpotId" });
     }
   }
-  Booking.init({
-    spotId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
-    startDate: DataTypes.DATE,
-    endDate: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Booking',
-  });
+  Booking.init(
+    {
+      spotId: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
+      startDate: DataTypes.DATE,
+      endDate: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: "Booking",
+      defaultScope: {
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    }
+  );
   return Booking;
 };
