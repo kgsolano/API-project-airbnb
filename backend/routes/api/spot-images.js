@@ -21,18 +21,27 @@ const { user } = require("pg/lib/defaults");
 
 
 router.delete("/:imageId", requireAuth, async (req, res, next) => {
-    const spotImage = await SpotImage.findByPk(req.params.imageId)
+    const spotImage = await SpotImage.findByPk(req.params.imageId, {
+        include: {model: Spot}
+    })
+    
 
     if(!spotImage) {
         res.statusCode = 404
-        res.json({
+        return res.json({
           message: "Spot Image couldn't be found",
           statusCode: 404,
         });
     }
 
+    console.log(spotImage.Spot.ownerId);
+    if (req.user.id !== spotImage.Spot.ownerId){
+        res.statusCode = 404
+        return res.json("This spot does not belong to the current user")
+    }
+
     await spotImage.destroy();
-    res.json({
+    return res.json({
       message: "Successfully deleted",
       statusCode: 200,
     });

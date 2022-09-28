@@ -109,6 +109,40 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     res.json(booking)
 })
 
+router.delete("/:bookingId", requireAuth, async (req, res, next) => {
+  const bookingId = await Booking.findByPk(req.params.bookingId, {
+    include: [
+      {model: Spot},
+      {model: User}
+    ]
+  })
+
+  const spot = await Spot.findAll({
+    where: {id: bookingId.spotId}
+  })
+
+  const currentDate = new Date()
+
+  if(bookingId.userId !== req.user.id || bookingId.spotId !== spot[0].ownerId){
+    res.statusCode = 404
+    res.json({
+      message: "Booking couldn't be found",
+      statusCode: 404,
+    });
+  } else if (currentDate >= bookingId.startDate && currentDate <= bookingId.endDate){
+    res.statusCode = 403
+    res.json({
+      message: "Bookings that have been started can't be deleted",
+      statusCode: 403,
+    });
+  } else {
+    res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+  }
+})
+
 
 
 

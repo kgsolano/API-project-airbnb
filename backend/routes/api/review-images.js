@@ -20,7 +20,9 @@ const { check } = require("express-validator");
 const { user } = require("pg/lib/defaults");
 
 router.delete("/:imageId", requireAuth, async (req, res, next) => {
-    const reviewImage = await ReviewImage.findByPk(req.params.imageId)
+    const reviewImage = await ReviewImage.findByPk(req.params.imageId, {
+      include: {model: Review}
+    })
 
     if(!reviewImage){
         res.statusCode = 404;
@@ -29,6 +31,7 @@ router.delete("/:imageId", requireAuth, async (req, res, next) => {
           statusCode: 404,
         });
     }
+    
 
     await reviewImage.destroy()
     res.json({
