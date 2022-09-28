@@ -52,6 +52,63 @@ router.get("/current", requireAuth, async (req, res, next) => {
     res.json({Bookings: bookingData})
 })
 
+router.put("/:bookingId", requireAuth, async (req, res, next) => {
+  const booking = await Booking.findByPk(req.params.bookingId)
+  const { startDate, endDate } = req.body
+
+
+  if(!booking){
+    res.statusCode = 404;
+    res.json({
+      message: "Booking couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const currentDate = new Date().getTime
+  if(currentDate >= endDate){
+    res.statusCode = 403
+    res.json({
+      message: "Past bookings cannot be modified",
+      statusCode: 403
+    })
+  }
+
+   const currentEndDate = new Date(endDate).getTime();
+   const currentStartDate = new Date(startDate).getTime();
+
+  if (currentEndDate <= currentStartDate) {
+    res.statusCode = 400;
+    res.json({
+      message: "Validation Error",
+      statusCode: 400,
+      errors: {
+        endDate: "endDate cannot be on or before the start date",
+      },
+    });
+  }
+
+  if((currentStartDate >= startDate && currentEndDate <= endDate) || currentStartDate <= startDate && currentEndDate >= endDate){
+    res.statusCode = 403
+    res.json({
+      message: "Sorry, this spot is already booked for the specified dates",
+      statusCode: 403,
+      errors: {
+        startDate: "Start date conflicts with an existing booking",
+        endDate: "End date conflicts with an existing booking",
+      },
+    });
+  }
+
+
+    booking.update({
+      startDate,
+      endDate,
+    });
+
+    res.json(booking)
+})
+
 
 
 
