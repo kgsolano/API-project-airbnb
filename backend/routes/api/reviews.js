@@ -43,6 +43,22 @@ router.get("/current", requireAuth, async (req, res, next) => {
     res.json(reviews)
 })
 
+// Edit a review
+router.put("/:reviewId", requireAuth, async (req, res, next) => {
+  const editedReview = await Review.scope("includeEdits").findByPk(req.params.reviewId);
+
+  const { review, stars } =
+    req.body;
+
+  editedReview.update({
+    spotId: Spot.id,
+    review,
+    stars,
+  });
+
+  res.json(editedReview);
+});
+
 // add an image to a review
 router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
 

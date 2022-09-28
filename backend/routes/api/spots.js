@@ -6,7 +6,7 @@ const {
   restoreUser,
   requireAuth,
 } = require("../../utils/auth");
-const { User, Spot, Review, SpotImage, sequelize } = require("../../db/models");
+const { User, Spot, Review, SpotImage, ReviewImage, sequelize } = require("../../db/models");
 const { handleValidationErrors } = require("../../utils/validation");
 const { check } = require("express-validator");
 const { user } = require("pg/lib/defaults");
@@ -48,6 +48,23 @@ router.get("/current", requireAuth, async (req, res, next) => {
   }
   res.json(resBody);
 });
+
+router.get("/:spotId/reviews", async (req, res, next) => {
+  const reviews = await Review.findAll({
+    where: {
+      spotId: req.params.spotId,
+    },
+    include: [
+      {
+        model: User,
+      },
+      {
+        model: ReviewImage
+      }
+    ],
+  });
+  res.json(reviews)
+  })
 
 router.get("/:spotId", async (req, res, next) => {
 
