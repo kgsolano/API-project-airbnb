@@ -378,21 +378,31 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 })
 
 router.delete("/:spotId", requireAuth, async (req, res, next) => {
-  if(req.user.id !== Spot.ownerId){
-    res.json({
-      message: "Spot could not be found",
+  const spot = await Spot.findByPk(req.params.spotId);
+  
+  if (!spot){
+    res.statusCode = 404
+    return res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  if(req.user.id !== spot.ownerId){
+   return res.json({
+      message: "Spt must belong to current user",
       statusCode: 404
     })
+  }
   
-     const removeSpot = await Spot.findByPk(req.params.spotId);
 
-     await removeSpot.destroy();
+     await spot.destroy();
 
-     res.json({
+     return res.json({
        message: "Successfully Deleted",
        statusCode: 200,
      });
-}
+
 })
 
 module.exports = router
