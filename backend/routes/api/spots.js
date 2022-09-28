@@ -72,7 +72,7 @@ router.get("/:spotId", async (req, res, next) => {
     ],
     raw: true
   });
-  console.log(reviewData[0].avgStarRating)
+  // console.log(reviewData[0].avgStarRating)
 
  
 
@@ -192,6 +192,34 @@ router.post("/", requireAuth, async (req, res, next) => {
     res.json(newSpot)
 })
 
+// create a review based on a spot's id
+router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
+  const spot = await Spot.findByPk(req.params.spotId)
+
+
+  const { review, stars } = req.body
+
+  const newReview = await Review.create({
+    userId: req.user.id,
+    spotId: spot.id,
+    review,
+    stars
+  })
+
+  if (req.user.Id === newReview.spotId){
+    res.statusCode = 403
+    res.json({
+      "message": "User already has a review for this spot"
+    })
+  }
+  // console.log("newreview id:", newReview.spotId)
+  // console.log("current user id:" , req.user.id)
+
+  // console.log(newReview)
+  res.json(newReview)
+})
+
+//create an image for a spot
 router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   const { url, preview } = req.body
   const spot = await Spot.findByPk(req.params.spotId)
@@ -214,7 +242,7 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
     const newImage = await SpotImage.create({
       spotId: spot.id, url, preview
     })
-    console.log(newImage)
+    // console.log(newImage)
     res.json(newImage)
 
   }
