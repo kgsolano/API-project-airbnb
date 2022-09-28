@@ -62,13 +62,13 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
 // add an image to a review
 router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
 
-    // const reviewId = await Review.findByPk(req.params.reviewId)
+    const reviewId = await Review.findByPk(req.params.reviewId)
 
     if(req.user.id){
         const { url } = req.body
     
         const newReviewImg = await ReviewImage.create({
-            reviewId: Review.id,
+            reviewId: reviewId.id,
             url
         })
     
