@@ -116,13 +116,20 @@ router.delete("/:bookingId", requireAuth, async (req, res, next) => {
       {model: User}
     ]
   })
+ if(!bookingId){
+  res.statusCode = 404
+  return res.json({
+    message: "Review Image couldn't be found",
+    statusCode: 404,
+  });
+ }
+  console.log(bookingId)
 
   const spot = await Spot.findAll({
     where: {id: bookingId.spotId}
   })
 
   const currentDate = new Date()
-
   if(bookingId.userId !== req.user.id || bookingId.spotId !== spot[0].ownerId){
     res.statusCode = 404
     res.json({
