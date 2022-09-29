@@ -21,18 +21,30 @@ const { user } = require("pg/lib/defaults");
 
 router.get("/current", requireAuth, async (req, res, next) => {
     const bookingData = await Booking.findAll({
-        where: {
-            userId: req.user.id
+      where: {
+        userId: req.user.id,
+      },
+      include: [
+        {
+          model: Spot,
+          attributes: [
+            "id",
+            "ownerId",
+            "address",
+            "city",
+            "state",
+            "country",
+            "lat",
+            "lng",
+            "name",
+            "price",
+          ],
+          raw: true,
         },
-        include: [
-          {model: Spot,
-            raw: true
-          },
-        ],
-        
-    })
+      ],
+    });
     // console.log(bookingData)
-    console.log(bookingData[0].Spot.id)
+    // console.log(bookingData[0].id)
     for(const booking of bookingData){
     
       let spotId = booking.Spot.id
@@ -46,7 +58,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
         raw: true,
       });
       // console.log(booking.Spot.dataValues)
-      booking.Spot.dataValues.previewImage = previewImages[0].url
+      booking.Spot.dataValues.previewImage = previewImages.url
     }
 
     res.json({Bookings: bookingData})
