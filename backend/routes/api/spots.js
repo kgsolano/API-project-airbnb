@@ -108,24 +108,28 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
     const differentBookings = await Booking.findAll({
       where: {
         spotId: currentSpot.id
-      }
+      },
+      attributes: ['spotId', 'startDate', 'endDate']
     })
     return res.json({
       bookings: differentBookings})
   }
 
   if(req.user.id === currentSpot.ownerId){
-    const userBooking = await Booking.findAll({
+    const userBooking = await Booking.scope("includeEdits").findAll({
       where: {
         spotId: currentSpot.id
       },
       include: [
-        {model: User}
+        {model: User,
+        attributes: ['id', 'firstName', 'lastName']
+        }
       ]
+      
     })
 
     return res.json({
-      bookings: userBooking
+      Bookings: userBooking
     })
   }
 
@@ -134,7 +138,7 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
 
 router.get("/:spotId/reviews", async (req, res, next) => {
   
-  const spot = await Spot.findByPk(req.params.spotId)
+  const spot = await Spot.scope("includeEdits").findByPk(req.params.spotId)
 
   if(!spot){
     res.statusCode = 404
@@ -144,7 +148,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
     });
   }
 
-  const reviews = await Review.findAll({
+  const reviews = await Review.scope("includeEdits").findAll({
     where: {
       spotId: req.params.spotId,
     },
@@ -169,9 +173,11 @@ router.get("/:spotId", async (req, res, next) => {
   const spotData = await Spot.scope("includeEdits").findByPk(req.params.spotId,{
 
     include: [
-      {model: SpotImage}, 
+      {model: SpotImage,
+      attributes: ['id', 'url', 'preview']
+      }, 
       {model: User, as: "Owner",
-      attributes: ['firstName', 'lastName']
+      attributes: ['id', 'firstName', 'lastName']
       }
     ]
   })
@@ -507,7 +513,10 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
       spotId: spot.id, url, preview
     })
 
-    const resWithoutDates = await SpotImage.findByPk(newImage.id)
+    const resWithoutDates = await SpotImage.findByPk(newImage.id, {
+      attributes: ['url', 'preview']
+    }
+    )
 
     // console.log("without dates -----", resWithoutDates)
     // console.log(newImage)

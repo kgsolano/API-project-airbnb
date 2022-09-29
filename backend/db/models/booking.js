@@ -30,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
           exclude: ["createdAt", "updatedAt"],
         },
       },
+      scopes: {
+        includeEdits: {
+          attributes: {
+            include: ["createdAt", "updatedAt"],
+          },
+        },
+      },
     }
   );
   return Booking;
