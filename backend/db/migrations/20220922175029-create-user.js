@@ -11,6 +11,11 @@ module.exports = {
         // references: { model: "Spots" },
         // references: { model: "Reviews" },
       },
+      email: {
+        type: Sequelize.STRING(256),
+        allowNull: false,
+        unique: true,
+      },
       username: {
         type: Sequelize.STRING(30),
         allowNull: false,
@@ -22,11 +27,7 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
-      email: {
-        type: Sequelize.STRING(256),
-        allowNull: false,
-        unique: true,
-      },
+
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false,

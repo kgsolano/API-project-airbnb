@@ -81,14 +81,17 @@ router.get("/current", requireAuth, async (req, res, next) => {
       raw: true,
     });
 
-    const newArr = [];
-    for (let i = 0; i < previewImages.length; i++) {
-      if (previewImages[i].preview) {
-        newArr.push(previewImages[i].url);
-        // currentSpot.previewImage = previewImages[i].url
-      }
-      newArr.length ? (currentSpot.previewImage = newArr) : null;
-    }
+    currentSpot.previewImage = previewImages[0].url;
+
+
+    // const newArr = [];
+    // for (let i = 0; i < previewImages.length; i++) {
+    //   if (previewImages[i].preview) {
+    //     newArr.push(previewImages[i].url);
+    //     // currentSpot.previewImage = previewImages[i].url
+    //   }
+    //   newArr.length ? (currentSpot.previewImage = newArr) : null;
+    // }
   }
   res.json({Spots: Spots});
 });
@@ -277,14 +280,16 @@ router.get("/", async (req, res, next) => {
       raw: true,
     });
 
-    const newArr = [];
-    for (let i = 0; i < previewImages.length; i++) {
-      if (previewImages[i].preview) {
-        newArr.push(previewImages[i].url);
-        // currentSpot.previewImage = previewImages[i].url
-      }
-      newArr.length ? (currentSpot.previewImage = newArr) : null;
-    }
+    // const newArr = [];
+    // for (let i = 0; i < previewImages.length; i++) {
+    //   if (previewImages[i].preview) {
+    //     newArr.push(previewImages[i].url);
+    //     // currentSpot.previewImage = previewImages[i].url
+    //   }
+    //   newArr.length ? (currentSpot.previewImage = newArr) : null;
+    // }
+
+    currentSpot.previewImage = previewImages[0].url;
   }
 
 
@@ -451,8 +456,10 @@ router.post("/", requireAuth, async (req, res, next) => {
 // create a review based on a spot's id
 router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, next) => {
   const spot = await Spot.findByPk(req.params.spotId)
-  const currentReview = await Review.findAll({
-    where: {spotId: req.params.spotId}
+  
+  const currentReview = await Review.findOne({
+    where: {spotId: req.params.spotId,
+            userId: req.user.id}
   })
 
 
@@ -466,6 +473,14 @@ router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, ne
     });
   }
 
+  if (currentReview){
+    res.statusCode = 403
+    res.json({
+      "message": "User already has a review for this spot",
+      statusCode: 403
+    })
+  }
+  
   const newReview = await Review.create({
     userId: req.user.id,
     spotId: spot.id,
@@ -473,15 +488,9 @@ router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, ne
     stars
   })
 
-  console.log("current", currentReview)
-  console.log("new", newReview)
-  if (req.user.Id === newReview.spotId){
-    res.statusCode = 403
-    res.json({
-      "message": "User already has a review for this spot",
-      statusCode: 403
-    })
-  }
+  // console.log("current", currentReview)
+  // console.log("new", newReview)
+
   // console.log("newreview id:", newReview.spotId)
   // console.log("current user id:" , req.user.id)
 
@@ -514,7 +523,7 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
     })
 
     const resWithoutDates = await SpotImage.findByPk(newImage.id, {
-      attributes: ['url', 'preview']
+      attributes: ['id', 'url', 'preview']
     }
     )
 
