@@ -32,9 +32,15 @@ router.get("/current", requireAuth, async (req, res, next) => {
             userId: req.user.id
         },
         include:[
-            {model: User},
-            {model: Spot},
-            {model: ReviewImage}
+            {model: User,
+            attributes: ['id', 'firstName', 'lastName']
+            },
+            {model: Spot,
+            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price' ]
+            },
+            {model: ReviewImage,
+            attributes: ['id', 'url']
+            }
         ]
     })
 
@@ -62,7 +68,7 @@ router.put("/:reviewId", requireAuth, validateReview, async (req, res, next) => 
     req.body;
 
     if(!editedReview){
-        res.statusCode = 400
+        res.statusCode = 404
         res.json({
           message: "Review couldn't be found",
           statusCode: 404,
@@ -114,7 +120,9 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
             url
         })
 
-         const resWithoutDates = await ReviewImage.findByPk(newReviewImg.id);
+         const resWithoutDates = await ReviewImage.findByPk(newReviewImg.id, {
+            attributes: ['id', 'url']
+         });
     
         res.json(resWithoutDates)
     }

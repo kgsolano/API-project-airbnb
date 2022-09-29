@@ -20,48 +20,48 @@ const { check } = require("express-validator");
 const { user } = require("pg/lib/defaults");
 
 router.get("/current", requireAuth, async (req, res, next) => {
-    const bookingData = await Booking.findAll({
-      where: {
-        userId: req.user.id,
-      },
-      include: [
-        {
-          model: Spot,
-          attributes: [
-            "id",
-            "ownerId",
-            "address",
-            "city",
-            "state",
-            "country",
-            "lat",
-            "lng",
-            "name",
-            "price",
-          ],
-          raw: true,
-        },
-      ],
-    });
-    // console.log(bookingData)
-    // console.log(bookingData[0].id)
-    for(const booking of bookingData){
-    
-      let spotId = booking.Spot.id
-
-      const previewImages = await SpotImage.findAll({
-        
-        where: {
-          spotId: spotId,
-        },
-        attributes: ["url"],
+  const bookingData = await Booking.scope("includeEdits").findAll({
+    where: {
+      userId: req.user.id,
+    },
+    include: [
+      {
+        model: Spot,
+        // attributes: [
+        //   "id",
+        //   "ownerId",
+        //   "address",
+        //   "city",
+        //   "state",
+        //   "country",
+        //   "lat",
+        //   "lng",
+        //   "name",
+        //   "price",
+        // ],
         raw: true,
-      });
-      // console.log(booking.Spot.dataValues)
-      booking.Spot.dataValues.previewImage = previewImages.url
-    }
+      },
+    ],
+  });
+  // console.log(bookingData)
+  // console.log(bookingData[0].id)
+  for (const booking of bookingData) {
+    let spotId = booking.Spot.id;
 
-    res.json({Bookings: bookingData})
+    const previewImages = await SpotImage.findAll({
+      where: {
+        spotId: spotId,
+      },
+      attributes: ["url"],
+      raw: true,
+    });
+    // console.log(booking.Spot.dataValues);
+    // booking.Spot.dataValues.previewImage = previewImages.url
+    booking.Spot.dataValues.previewImage = previewImages[0].url
+    // console.log(previewImages[0].url)
+  }
+
+  res.json({ Bookings: bookingData });
 })
 
 router.put("/:bookingId", requireAuth, async (req, res, next) => {
@@ -77,14 +77,14 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     });
   }
 
-  const currentDate = new Date().getTime
-  if(currentDate >= endDate){
-    res.statusCode = 403
-    res.json({
-      message: "Past bookings cannot be modified",
-      statusCode: 403
-    })
-  }
+  // const currentDate = new Date().getTime
+  // if(currentDate >= endDate){
+  //   res.statusCode = 403
+  //   res.json({
+  //     message: "Past bookings cannot be modified",
+  //     statusCode: 403
+  //   })
+  // }
 
    const currentEndDate = new Date(endDate).getTime();
    const currentStartDate = new Date(startDate).getTime();
