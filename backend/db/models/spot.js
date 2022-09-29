@@ -49,28 +49,6 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       }
-      // defaultScope: {
-      //   attributes: {
-      //     include: {model: SpotImages},
-      //     attributes: [
-      //       "id",
-      //       "ownerId",
-      //       "address",
-      //       "city",
-      //       "state",
-      //       "country",
-      //       "lat",
-      //       "lng",
-      //       "name",
-      //       "description",
-      //       "price",
-      //       "createAt",
-      //       "updatedAt",
-      //       "avgRating",
-      //       [SpotImages.url, "previewImage"],
-      //     ],
-      //   },
-      // },           COME BACK TO THIS TO ALIAS PREVIEWIMG
     }
   );
   return Spot;

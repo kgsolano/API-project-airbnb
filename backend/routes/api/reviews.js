@@ -12,11 +12,22 @@ const { check } = require("express-validator");
 const { user } = require("pg/lib/defaults");
 const review = require("../../db/models/review");
 
+const validateReview = [
+  check("review")
+    .exists({ checkFalsy: true })
+    .withMessage("Review text is required"),
+  check("stars")
+    .exists({ checkFalsy: true })
+    .isInt({ min: 1, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors,
+];
+
 // get all reviews of the current user
 router.get("/current", requireAuth, async (req, res, next) => {
 
     const resBody = {}
-    const reviews = await Review.findAll({
+    const reviews = await Review.scope("includeEdits").findAll({
         where: {
             userId: req.user.id
         },
@@ -40,15 +51,23 @@ router.get("/current", requireAuth, async (req, res, next) => {
     }
 
     
-    res.json(reviews)
+    res.json({Reviews: reviews})
 })
 
 // Edit a review
-router.put("/:reviewId", requireAuth, async (req, res, next) => {
+router.put("/:reviewId", requireAuth, validateReview, async (req, res, next) => {
   const editedReview = await Review.scope("includeEdits").findByPk(req.params.reviewId);
 
   const { review, stars } =
     req.body;
+
+    if(!editedReview){
+        res.statusCode = 400
+        res.json({
+          message: "Review couldn't be found",
+          statusCode: 404,
+        });
+    }
 
   editedReview.update({
     spotId: Spot.id,
@@ -64,6 +83,29 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
 
     const reviewId = await Review.findByPk(req.params.reviewId)
 
+    const allReviews = await ReviewImage.count({
+        where: {reviewId: req.params.reviewId}
+    })
+
+    if(allReviews >= 10){
+        res.statusCode = 403
+        res.json({
+          message: "Maximum number of images for this resource was reached",
+          statusCode: 403,
+        });
+    }
+
+
+    console.log(allReviews)
+
+    if(!reviewId) {
+        res.statusCode = 404
+        res.json({
+          message: "Review couldn't be found",
+          statusCode: 404,
+        });
+    }
+
     if(req.user.id){
         const { url } = req.body
     
@@ -71,8 +113,10 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
             reviewId: reviewId.id,
             url
         })
+
+         const resWithoutDates = await ReviewImage.findByPk(newReviewImg.id);
     
-        res.json(newReviewImg)
+        res.json(resWithoutDates)
     }
 })
 
