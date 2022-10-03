@@ -119,7 +119,7 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
   }
 
   if(req.user.id === currentSpot.ownerId){
-    const userBooking = await Booking.scope("includeEdits").findAll({
+    const userBooking = await Booking.findAll({
       where: {
         spotId: currentSpot.id
       },

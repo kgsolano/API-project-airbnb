@@ -20,7 +20,7 @@ const { check } = require("express-validator");
 const { user } = require("pg/lib/defaults");
 
 router.get("/current", requireAuth, async (req, res, next) => {
-  const bookingData = await Booking.scope("includeEdits").findAll({
+  const bookingData = await Booking.findAll({
     where: {
       userId: req.user.id,
     },
