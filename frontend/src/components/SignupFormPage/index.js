@@ -78,6 +78,17 @@ function SignupFormPage() {
         />
       </label>
       <button type="submit">Sign Up</button>
+      <button
+        onClick={() => 
+        dispatch(
+          sessionActions.login({
+            credential: "Demo-lition",
+            password: "password",
+          })
+        )}
+        >
+          Demo User
+        </button>
     </form>
   );
 }

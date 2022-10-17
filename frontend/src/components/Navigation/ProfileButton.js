@@ -1,9 +1,11 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 function ProfileButton({ user }) {
+  const {spotId} = useParams()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -41,6 +43,7 @@ function ProfileButton({ user }) {
           <li>
             <button onClick={logout}>Log Out</button>
           </li>
+          {/* <Link to={`/spots/${spotId}/edit`}>Manage your Spots</Link> */}
         </ul>
       )}
     </>
