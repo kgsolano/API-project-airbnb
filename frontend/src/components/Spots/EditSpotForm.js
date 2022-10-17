@@ -9,7 +9,7 @@ import { deleteSpotThunk, editSpotThunk, getAllSpots } from '../../store/spots';
 function EditSpotForm() {
     const {spotId} = useParams()
     const spot = useSelector(state => state.spots.singleSpot)
-    console.log("spot to be editted ----", spot)
+    // console.log("spot to be editted ----", spot)
      const dispatch = useDispatch();
      const history = useHistory();
 

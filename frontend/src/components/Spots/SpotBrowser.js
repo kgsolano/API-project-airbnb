@@ -25,6 +25,7 @@ const SpotBrowser = () => {
                 <img
                     src={spot.previewImage}
                     alt='castleImg'
+                    className='spot-img'
                 >
                 </img>
                 <div className='title'>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { getOneSpot } from '../../store/spots'
+import ReviewBrowser from '../Reviews/ReviewBrowser'
 
 
 function SpotDetail() {
@@ -27,7 +28,7 @@ function SpotDetail() {
         <h2>{spot.description}</h2>
       </div>
       <div className='reviews'>
-        <p>reviews somehow</p>
+        <ReviewBrowser spot={spot} />
       </div>
     </div>
   );
