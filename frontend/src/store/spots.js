@@ -1,17 +1,39 @@
 import { csrfFetch } from "./csrf"
 
- /* ----ACTIONS---- */
-const LOAD = 'spots/LOAD'
+                /* ----ACTIONS---- */
+const LOAD_ALL = 'spots/LOAD_ALL'
+const LOAD_ONE = 'spots/LOAD_ONE'
+const ADD = 'spots/ADD'
+const DELETE = 'spots/DELETE'
 
 
-/* ----ACTION CREATORS---- */
+            /* ----ACTION CREATORS---- */
+// load all spots
 export const load = allSpots  => ({
-    type: LOAD,
+    type: LOAD_ALL,
     allSpots   // allSpots called from thunk
 })
 
+// load one spot
+export const loadOneSpot = spot => ({
+    type: LOAD_ONE,
+    spot
+})
 
-/* ----THUNKS---- */
+// add a spot
+export const addSpot = spot => ({
+    type: ADD,
+    spot
+})
+
+// delete a spot
+export const deleteSpot = id => ({
+    type: DELETE,
+    id
+})
+
+
+                /* ----THUNKS---- */
 
 // get all spots thunk
 export const getAllSpots = () => async dispatch => {
@@ -23,23 +45,88 @@ export const getAllSpots = () => async dispatch => {
     }
 }
 
+//get one spot thunk
+export const getOneSpot = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}`)
 
-/* ----INITIAL STATE---- */
+    if(response.ok){
+        const spot = await response.json()
+        dispatch(loadOneSpot(spot))
+    }
+}
+
+// add a spot thunk
+export const addSpotThunk = (formInfo) => async dispatch => {
+    const response = await csrfFetch("/api/spots", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formInfo),
+    });
+
+    if(response.ok){
+        const newSpot = await response.json()
+        dispatch(addSpot(newSpot))
+        return newSpot
+    }
+}
+
+
+// edit a spot thunk
+export const editSpotThunk = (data) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${data.id}`, {
+        method: "PUT",
+        headers : {"Content-Type": "application/json"},
+        body: JSON.stringify(data),
+    })
+    
+    if(response.ok) {
+        const editSpot = await response.json()
+        console.log("this is the edit a spot message", editSpot)
+        dispatch(addSpot(editSpot))
+        return editSpot
+    }
+}
+
+// delete a spot thunk
+export const deleteSpotThunk = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: "DELETE",
+    })
+
+    if(response.ok){
+        dispatch(deleteSpot(spotId))
+    }
+}
+
+
+
+                /* ----INITIAL STATE---- */
 const initialState = {
         allSpots: {},
         singleSpot: {}
 }
 
-/* ----REDUCER---- */
+                    /* ----REDUCER---- */
 export default function SpotsReducer(state = initialState, action) {
     switch(action.type){
-        case LOAD:
-            const loadState = {...state}
+        case LOAD_ALL:
+            const loadAllState = {...state}
             action.allSpots.Spots.forEach((spot) => {   // key into Spots from backend
-                loadState.allSpots[spot.id] = spot      // normalize array
+                loadAllState.allSpots[spot.id] = spot      // normalize array
             })
-            return loadState
-            
+            return loadAllState
+        case LOAD_ONE:
+            const loadOneState = {...state}
+            loadOneState.singleSpot = action.spot
+            return loadOneState
+        case ADD:
+            const addState = {...state}
+            addState.allSpots[action.spot.id] = action.spot
+            return addState
+        case DELETE:
+            const deleteState = {...state}
+            delete deleteState[action.id]
+            return deleteState 
         default:
             return state;
     }
