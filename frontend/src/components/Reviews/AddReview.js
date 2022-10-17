@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { createReviewThunk } from '../../store/reviews'
 
@@ -7,16 +7,20 @@ function AddReview() {
     const dispatch = useDispatch()
     const history = useHistory()
     const {spotId} = useParams()
+    const user = useSelector((state) => state.session.user)
 
-    const [reviewText, setReviewText] = useState('')
-    const [rating, setRating] = useState('Please Select')
+
+    const [review, setReview] = useState('')
+    const [rating, setRating] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const payload = {
-            reviewText,
-            rating
+            spotId,
+            userId: user.id,
+            review,
+            stars: rating
         }
 
         let createdReview = dispatch(createReviewThunk(payload))
@@ -34,8 +38,8 @@ function AddReview() {
           <input
             type='textarea'
             placeholder='Your Review'
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
             />
             <h4>Give us a rating!</h4>
             <input

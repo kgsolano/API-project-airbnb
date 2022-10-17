@@ -3,17 +3,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllReviews } from '../../store/reviews'
 
 function ReviewBrowser({spot}) {
-    const reviews = useSelector((state) => state.reviews.spot[spot.id])
+    const reviews = useSelector((state) => Object.values(state.reviews.spot))
+    
     console.log('this is the reviews --->', reviews)
-
+    
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getAllReviews(spot.id))
-    }, [dispatch, spot.id])
-console.log("this is the review's id", reviews)
+    }, [dispatch, spot.id, reviews.review])
+
   return (
     <div>
-        {reviews && reviews.review}
+        <h2>Reviews</h2>
+        <ul>
+        {reviews && 
+            reviews.map((review) => (
+                <li key={review.id}>{review.review}</li>
+            ))}
+
+        </ul>
+
     </div>
   )
 }

@@ -39,7 +39,7 @@ export const getAllReviews = (spotId) => async dispatch => {
 
 // add a review thunk
 export const createReviewThunk = (formInfo) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${formInfo.id}/reviews`, {
+    const response = await csrfFetch(`/api/spots/${formInfo.spotId}/reviews`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(formInfo)
@@ -50,6 +50,7 @@ export const createReviewThunk = (formInfo) => async dispatch => {
         dispatch(createReview(newReview))
         return newReview
     }
+
 }
 
 // delete a review thunk
@@ -73,7 +74,7 @@ const initialState = {
 export default function ReviewsReducer(state = initialState, action) {
     switch(action.type){
         case LOAD:
-            const loadState = {...state, spot:{...state.spot}, user: {...state.user}}
+            const loadState = {...state}
             action.allReviews.Reviews.forEach((review) => {
                 loadState.spot[review.id] = review
             })
