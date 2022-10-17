@@ -288,8 +288,11 @@ router.get("/", async (req, res, next) => {
     //   }
     //   newArr.length ? (currentSpot.previewImage = newArr) : null;
     // }
-
-    currentSpot.previewImage = previewImages[0].url;
+    if(!previewImages.length) {
+      currentSpot.previewImage = null /* 'there are currently no images assigned to this spot' */
+    } else {
+      currentSpot.previewImage = previewImages[0].url;
+    }
   }
 
 

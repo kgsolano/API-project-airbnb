@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getAllSpots } from '../../store/spots'
+import { addSpotThunk, getAllSpots } from '../../store/spots'
+import { Link } from 'react-router-dom'
+import './spots.css'
 
 const SpotBrowser = () => {
     
@@ -12,12 +14,14 @@ const SpotBrowser = () => {
     const spots = useSelector((state) => Object.values(state.spots.allSpots))   // state/reducer/action.payload
     // console.log("this is state.spots ~~~~~>", spots);
     
+  
     
     return (
         <div>
             
            {spots.map((spot) =>
-            <div key={spot.id} className='spot-card'>
+           <Link to={`/spots/${spot.id}`} key={spot.id}>
+            <div className='spot-card'>
                 <img
                     src={spot.previewImage}
                     alt='castleImg'
@@ -31,7 +35,14 @@ const SpotBrowser = () => {
                     <p>{spot.description}</p>
                     <p>${spot.price} per night</p>
                 </div>
-            </div>)}
+            </div>
+            </Link>
+            )}
+            <Link to={'/spots/new'}>
+                <button>
+                    Become a Host! (create spot)
+                </button>
+            </Link>
         </div>
     )
 }
