@@ -26,6 +26,7 @@ function AddReview() {
         let createdReview = dispatch(createReviewThunk(payload))
         if (createdReview) {
             history.push(`/spots/${spotId}`)
+            console.log("this is the payload", payload)
         }
     }
 

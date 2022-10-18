@@ -10,14 +10,19 @@ function ReviewBrowser({spot}) {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getAllReviews(spot.id))
-    }, [dispatch, spot.id, reviews.review])
+    }, [dispatch, spot.id])
 
+    // if(reviews){
+        const spotReviews = reviews.filter((review) => (
+            review.spotId === spot.id
+        ))
+    // }
   return (
     <div>
         <h2>Reviews</h2>
         <ul>
         {reviews && 
-            reviews.map((review) => (
+            spotReviews.map((review) => (
                 <li key={review.id}>{review.review}</li>
             ))}
 
