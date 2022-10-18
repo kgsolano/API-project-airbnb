@@ -6,20 +6,26 @@ import './spots.css'
 
 const SpotBrowser = () => {
     
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(getAllSpots())
-    // }, [dispatch])
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAllSpots())
+    }, [dispatch])
 
-    const spots = useSelector((state) => Object.values(state.spots.allSpots))   // state/reducer/action.payload
-    // console.log("this is state.spots ~~~~~>", spots);
+    
+    const spotsObj = useSelector((state) => state.spots.allSpots)   // state/reducer/action.payload
+    console.log("this is the spotsObj ---->", spotsObj)
+    if(!spotsObj) return null
+
+    const spots = Object.values(spotsObj)
+    
+    
     
   
     
     return (
         <div>
             
-           {spots.map((spot) =>
+           {spots && spots.map((spot) =>
            <Link to={`/spots/${spot.id}`} key={spot.id}>
             <div className='spot-card'>
                 <img

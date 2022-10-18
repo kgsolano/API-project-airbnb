@@ -470,7 +470,7 @@ router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, ne
 
   if(!spot){
     res.statusCode = 404
-    res.json({
+    return res.json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
@@ -478,7 +478,7 @@ router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, ne
 
   if (currentReview){
     res.statusCode = 403
-    res.json({
+    return res.json({
       "message": "User already has a review for this spot",
       statusCode: 403
     })

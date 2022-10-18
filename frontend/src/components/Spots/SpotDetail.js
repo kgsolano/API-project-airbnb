@@ -8,15 +8,31 @@ import { getAllReviews } from "../../store/reviews";
 
 function SpotDetail() {
   const { spotId } = useParams();
-  const spot = useSelector((state) => state.spots.singleSpot);
-  const reviews = useSelector((state) => state.reviews.spot[spot.id]);
-  console.log("this is the reviews --->", reviews);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllReviews(spotId));
     dispatch(getOneSpot(spotId));
   }, [dispatch, spotId]);
+  
+  const reviewsObj = useSelector((state) => state.reviews.user);
+  const spot = useSelector((state) => state.spots.singleSpot);
+
+  // conditionally rendered spots
+  if(!spot?.id) return null
+  
+  
+
+  //conditionally rendered reviews
+  // if (!reviewsObj) return null;
+  // const reviews = Object.values(reviewsObj);
+  // if(!reviews.length) return null
+  // console.log("this is the review ----", reviews)
+  
+  // const reviews = useSelector((state) => state.reviews.spot[spotId]);
+
+  // console.log("this is the reviews --->", reviews);
+
 
   //dispatch review
   return (
@@ -30,13 +46,12 @@ function SpotDetail() {
       </div>
       <div className="spot-photo">image</div>
       <div className="description">
-        <h4>{spot.description}</h4>
+        <h4>{spot?.description}</h4>
       </div>
       <div className="reviews">
-        <ReviewBrowser spot={spot} />
+        <ReviewBrowser spotId={spotId} />
         <h4>
             <AddReview />
-      
         </h4>
       </div>
     </div>

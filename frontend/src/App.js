@@ -31,20 +31,22 @@ function App() {
           <Route exact path="/">
             <SpotBrowser />
           </Route>
-          <Route path="/spots/:spotId">
-            <SpotDetail />
-            <EditSpotForm />
-          </Route>
-          <Route path="/spots/new">
+          <Route exact path="/spots/new">
             <AddSpot />
+          </Route>
+          <Route exact path="/spots/:spotId">
+            <SpotDetail />
+          </Route>
+          <Route exact path='/spots/:spotId/edit'>
+            <EditSpotForm/>
           </Route>
           <Route exact path='/review'>
             <AddReview />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path='/current'>
+          <Route exact path='/current'>
             <User />
           </Route>
           {/* <Route path="/spots/:spotId/edit">

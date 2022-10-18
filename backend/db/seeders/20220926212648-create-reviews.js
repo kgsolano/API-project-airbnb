@@ -14,19 +14,19 @@ module.exports = {
         },
         {
           spotId: 2,
-          userId: 2,
+          userId: 1,
           review: "Loved the atmosphere!",
           stars: 3,
         },
         {
           spotId: 3,
-          userId: 3,
+          userId: 1,
           review: "Loved everything about this place!",
           stars: 3,
         },
         {
           spotId: 4,
-          userId: 4,
+          userId: 1,
           review: "Location was great but a little messy",
           stars: 4,
         },
