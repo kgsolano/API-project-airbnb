@@ -9,7 +9,7 @@ const DELETE = 'reviews/DELETE'
 
 /* ----ACTION CREATORS---- */
 // load all reviews
-export const loadSpotsReviews = allReviews => ({
+export const loadSpotsReviews = (allReviews) => ({
     type: LOAD_SPOTS,
     allReviews // all reviews gets passed in here from line 20
 })
@@ -34,7 +34,7 @@ export const deleteReview = id => ({
 
 /* ----THUNKS---- */
 
-// get all reviews thunk
+// load spot's reviews thunk
 export const getAllReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
 
@@ -47,9 +47,8 @@ export const getAllReviews = (spotId) => async dispatch => {
 // load user reviews
 export const getAllUserReviews = () => async (dispatch) => {
   const response = await csrfFetch(`/api/reviews/current`); 
-    console.log("this is the response", response)
+
   if (response.ok) {
-    console.log("i made it")
     const userReviews = await response.json();
     dispatch(loadUserReviews(userReviews));
   }
@@ -94,7 +93,8 @@ const initialState = {
 export default function ReviewsReducer(state = initialState, action) {
     switch(action.type){
         case LOAD_SPOTS:
-            const loadState = {spot: {}}
+            const loadState = {...state}
+            loadState.spot = {}
             action.allReviews.Reviews.forEach((review) => {
                 loadState.spot[review.id] = review
             })

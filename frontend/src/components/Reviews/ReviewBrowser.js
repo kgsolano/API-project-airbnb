@@ -9,23 +9,25 @@ function ReviewBrowser({spotId}) {
     }, [dispatch, spotId])
     
     // const reviews = useSelector((state) => Object.values(state.reviews.spot))
-     const reviewsObj = useSelector((state) => state.reviews.user);
+     const reviewsObj = useSelector((state) => state.reviews.spot);
      if (!reviewsObj) return null;
      const reviews = Object.values(reviewsObj);
     
     
+    
 
     // if(reviews){
-        const spotReviews = reviews.filter((review) => (
-            review.spotId === spotId
-        ))
+        // const spotReviews = reviews.filter((review) => (
+        //     review.spotId === spotId
+        // ))
+        // console.log('this is spotReviews ----->', spotReviews)
     // }
   return (
     <div>
       <h2>Reviews</h2>
       <ul>
         {reviews &&
-          spotReviews.map((review) => <li key={review.id}>{review.review}</li>)}
+          reviews.map((review) => <li key={review.id}>{review.review}</li>)}
       </ul>
     </div>
   );
