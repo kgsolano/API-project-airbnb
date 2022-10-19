@@ -8,14 +8,13 @@ import { deleteSpotThunk, editSpotThunk, getAllSpots } from '../../store/spots';
 
 function EditSpotForm() {
     const {spotId} = useParams()
-    const spot = useSelector(state => state.spots.singleSpot)
-    console.log("spot to be editted ----", spot)
+    // const spot = useSelector(state => state.spots.singleSpot)
      const dispatch = useDispatch();
      const history = useHistory();
 
     useEffect(() => {
         dispatch(getAllSpots())
-    }, [dispatch, spot])
+    }, [dispatch, spotId])
 
      // useState for the form values
      const [address, setAddress] = useState("");
@@ -29,10 +28,9 @@ function EditSpotForm() {
      const [price, setPrice] = useState("");
 
      const handleSubmit = async (e) => {
-    //    e.preventDefault();
+       e.preventDefault();
 
        const payload = {
-        ...spot,
          address,
          city,
          state,
@@ -44,16 +42,16 @@ function EditSpotForm() {
          price,
        };
 
-       let updatedSpot = await dispatch(editSpotThunk(payload));
-       console.log("this is a updated spot", updatedSpot);
+       let updatedSpot = await dispatch(editSpotThunk(payload, spotId));
        if (updatedSpot) {
-         history.push(`/spots/${spotId}`);
+         history.push(`/current`);
        }
      };
 
      const handleDelete = () => {
-        let deletedSpot = dispatch(deleteSpotThunk(spotId))
-        if(deletedSpot) {
+        let deletedSpot =  dispatch(deleteSpotThunk(spotId))
+        console.log(spotId)
+        if(deletedSpot ) {
             history.push(`/`)
         }
      }
@@ -127,6 +125,7 @@ function EditSpotForm() {
         <br />
         <input type="submit" />
         <button 
+            type='button'
             onClick={handleDelete}>
                 Delete this spot!
             </button>

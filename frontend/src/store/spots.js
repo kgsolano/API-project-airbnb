@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf"
 const LOAD_ALL = 'spots/LOAD_ALL'
 const LOAD_ONE = 'spots/LOAD_ONE'
 const ADD = 'spots/ADD'
+const ADD_IMG = 'spots/ADD_IMG'
 const DELETE = 'spots/DELETE'
 
 
@@ -26,6 +27,12 @@ export const addSpot = spot => ({
     spot
 })
 
+// add an image for a new spot
+export const addSpotImg = (image) => ({
+    type: ADD_IMG,
+    image
+})
+
 // delete a spot
 export const deleteSpot = id => ({
     type: DELETE,
@@ -42,6 +49,7 @@ export const getAllSpots = () => async dispatch => {
     if(response.ok){
         const allSpots = await response.json() // all spots data in js obj
         dispatch(load(allSpots))   // allSpots passed into action creator
+        return allSpots
     }
 }
 
@@ -70,15 +78,30 @@ export const addSpotThunk = (formInfo) => async dispatch => {
     }
 }
 
+//add a url for a new spot thunk
+export const addSpotImgThunk = (formInfo, spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(formInfo)
+    });
+
+    if(response.ok){
+        const newImg = await response.json()
+        dispatch(addSpotImg(formInfo))
+        return newImg
+    }
+}
+
 
 // edit a spot thunk
-export const editSpotThunk = (data) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${data.id}`, {
+export const editSpotThunk = (data, id) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}`, {
         method: "PUT",
         headers : {"Content-Type": "application/json"},
         body: JSON.stringify(data),
     })
-    
+    console.log("this response is working", response)
     if(response.ok) {
         const editSpot = await response.json()
         console.log("this is the edit a spot message", editSpot)
@@ -111,8 +134,9 @@ export default function SpotsReducer(state = initialState, action) {
     switch(action.type){
         case LOAD_ALL:
             const loadAllState = {...state}
+            loadAllState.allSpots = {}
             action.allSpots.Spots.forEach((spot) => {   // key into Spots from backend
-                loadAllState.allSpots[spot.id] = spot      // normalize array
+                loadAllState.allSpots[spot.id] = spot     // this populates the allSpots in the empty object
             })
             return loadAllState
         case LOAD_ONE:
@@ -120,12 +144,16 @@ export default function SpotsReducer(state = initialState, action) {
             loadOneState.singleSpot = action.spot
             return loadOneState
         case ADD:
-            const addState = {...state}
+            const addState = { ...state, allSpots: { ...state.allSpots } };
             addState.allSpots[action.spot.id] = action.spot
             return addState
+        case ADD_IMG:
+                const addImgState = {...state, allSpots: {...state.allSpots}}
+                addImgState.allSpots[action.image.id] = action.image
+                return addImgState
         case DELETE:
-            const deleteState = {...state}
-            delete deleteState[action.id]
+            const deleteState = {...state, allSpots: {...state.allSpots}}
+            delete deleteState.allSpots[action.id]
             return deleteState 
         default:
             return state;

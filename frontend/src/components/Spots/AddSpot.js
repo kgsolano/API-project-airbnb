@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { addSpotThunk } from '../../store/spots'
+import { addSpotImgThunk, addSpotThunk } from '../../store/spots'
 
 function AddSpot() {
     
@@ -20,8 +20,9 @@ function AddSpot() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
+    const [url, setUrl] = useState('')
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const payload = {
@@ -36,8 +37,15 @@ function AddSpot() {
             price
         }
 
-        let createdSpot = dispatch(addSpotThunk(payload))
+        const imgPayload = {
+          url,
+          preview: true
+        }
+
+        let createdSpot = await dispatch(addSpotThunk(payload))
         if (createdSpot) {
+          // dispatch new url thunk
+          dispatch(addSpotImgThunk(imgPayload, createdSpot.id))
             history.push('/')
         }
         console.log("this is a created spot", createdSpot)
@@ -109,6 +117,12 @@ function AddSpot() {
           onChange={(e) => setPrice(e.target.value)}
         />
         <br />
+        <input
+          type="text"
+          placeholder='URL'
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          />
         <input type="submit" />
       </form>
     </section>
