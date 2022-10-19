@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
 
   let sessionLinks;
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = <ProfileButton user={sessionUser}  />;
   } else {
     sessionLinks = (
       <>
@@ -22,13 +22,13 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
+    <ul className="nav-bar">
+      {/* <ul> */}
+        <NavLink exact to="/" className='home-logo'>
+          <img src='https://i.imgur.com/XKLweDp.png' alt='home-logo' className="logo-btn" />
         </NavLink>
         {isLoaded && sessionLinks}
-      </li>
+      {/* </ul> */}
     </ul>
   );
 }

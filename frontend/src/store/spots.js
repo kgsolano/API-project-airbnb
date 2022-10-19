@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf"
 const LOAD_ALL = 'spots/LOAD_ALL'
 const LOAD_ONE = 'spots/LOAD_ONE'
 const ADD = 'spots/ADD'
+const ADD_IMG = 'spots/ADD_IMG'
 const DELETE = 'spots/DELETE'
 
 
@@ -24,6 +25,12 @@ export const loadOneSpot = spot => ({
 export const addSpot = spot => ({
     type: ADD,
     spot
+})
+
+// add an image for a new spot
+export const addSpotImg = (image) => ({
+    type: ADD_IMG,
+    image
 })
 
 // delete a spot
@@ -68,6 +75,21 @@ export const addSpotThunk = (formInfo) => async dispatch => {
         const newSpot = await response.json()
         dispatch(addSpot(newSpot))
         return newSpot
+    }
+}
+
+//add a url for a new spot thunk
+export const addSpotImgThunk = (formInfo, spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(formInfo)
+    });
+
+    if(response.ok){
+        const newImg = await response.json()
+        dispatch(addSpotImg(formInfo))
+        return newImg
     }
 }
 
@@ -125,6 +147,10 @@ export default function SpotsReducer(state = initialState, action) {
             const addState = { ...state, allSpots: { ...state.allSpots } };
             addState.allSpots[action.spot.id] = action.spot
             return addState
+        case ADD_IMG:
+                const addImgState = {...state, allSpots: {...state.allSpots}}
+                addImgState.allSpots[action.image.id] = action.image
+                return addImgState
         case DELETE:
             const deleteState = {...state, allSpots: {...state.allSpots}}
             delete deleteState.allSpots[action.id]

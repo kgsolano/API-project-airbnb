@@ -1,9 +1,82 @@
+/* ---- SPOT BROWSER ---- */
+
+/* parent of link wrapper */
+.spot-browser-div {
+    /* border: 1px dashed red; */
+   padding-top: 20px;
+    display: flex;
+    display: inline-grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 5px;
+    row-gap: 15px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* parent of spot card */
+.link-wrapper {
+    color: black;
+    justify-self: center;
+    display: flex;
+}
+
+.link-wrapper:visited{
+    text-decoration: none;
+    color: black;
+}
+
+.link-wrapper:link {
+    text-decoration: none;
+    color: black;
+}
+
+.link-wrapper:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.link-wrapper:active {
+    text-decoration: none;
+    color: black;
+}
+
+/* parent of spotimg, title, description */
 .spot-card {
-    border: 1px solid black;
+    /* border: 1px dashed grey; */
+    height: 401px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    /* padding: 25px 25px */
 }
 
 .spot-img {
     border-radius: 8px;
-    height: 270px;
-    width: 257px;
+    height: 301px;
+    width: 300px;
+}
+
+
+.title > h4 {
+    float: left;
+    display: inline-block;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.title > p {
+    float: right;
+    padding-right: 10px;
+    margin: 10px 0;
+}
+
+.description > .description-text {
+    color: grey;
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.description > .description-price {
+    font-weight: bold;
 }

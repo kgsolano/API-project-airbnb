@@ -15,8 +15,9 @@ function SpotDetail() {
     dispatch(getOneSpot(spotId));
   }, [dispatch, spotId]);
   
-  const reviewsObj = useSelector((state) => state.reviews.user);
+  // const reviewsObj = useSelector((state) => state.reviews.user);
   const spot = useSelector((state) => state.spots.singleSpot);
+  console.log(spot)
 
   // conditionally rendered spots
   if(!spot?.id) return null
@@ -44,9 +45,11 @@ function SpotDetail() {
           {spot.state}
         </p>
       </div>
-      <div className="spot-photo">image</div>
+      <div className="spot-photo">
+        <img src={spot.SpotImages[0].url} alt='spot-img'/>
+        </div>
       <div className="description">
-        <h4>{spot?.description}</h4>
+        <p>{spot?.description}</p>
       </div>
       <div className="reviews">
         <ReviewBrowser spotId={spotId} />

@@ -23,10 +23,9 @@ const SpotBrowser = () => {
   
     
     return (
-        <div>
-            
+        <div className='spot-browser-div'>
            {spots && spots.map((spot) =>
-           <Link to={`/spots/${spot.id}`} key={spot.id}>
+           <Link to={`/spots/${spot.id}`} key={spot.id} className='link-wrapper'>
             <div className='spot-card'>
                 <img
                     src={spot.previewImage}
@@ -39,8 +38,8 @@ const SpotBrowser = () => {
                     <p>{spot.avgRating}</p>
                 </div>
                 <div className='description'>
-                    <p>{spot.description}</p>
-                    <p>${spot.price} per night</p>
+                    <p className='description-text'>{spot.description}</p>
+                    <p className='description-price'>${spot.price} per night</p>
                 </div>
             </div>
             </Link>

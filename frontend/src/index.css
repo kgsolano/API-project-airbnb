@@ -1,1 +1,12 @@
 /* TODO Add site wide styles */
+* {
+    font-family: 'IBM Plex Sans', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    /* font-family: 'Source Sans Pro', sans-serif; */
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

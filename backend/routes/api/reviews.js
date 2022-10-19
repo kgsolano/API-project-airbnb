@@ -52,7 +52,12 @@ router.get("/current", requireAuth, async (req, res, next) => {
             attributes: ['url'],
             raw: true
         })
-        rev.Spot.dataValues.previewImage = reviewImg.url
+        if(!rev.Spot.dataValues.previewImage){
+          rev.Spot.dataValues.previewImage = null
+        } else {
+          rev.Spot.dataValues.previewImage = reviewImg.url
+
+        }
        
     }
 
