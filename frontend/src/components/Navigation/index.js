@@ -24,10 +24,17 @@ function Navigation({ isLoaded }) {
   return (
     <ul className="nav-bar">
       {/* <ul> */}
-        <NavLink exact to="/" className='home-logo'>
-          <img src='https://i.imgur.com/XKLweDp.png' alt='home-logo' className="logo-btn" />
-        </NavLink>
-        {isLoaded && sessionLinks}
+      <NavLink exact to="/" className="home-logo">
+        <img
+          src="https://i.imgur.com/XKLweDp.png"
+          alt="home-logo"
+          className="logo-btn"
+        />
+      </NavLink>
+      <NavLink to={"/spots/new"} className='add-spot-link'>
+        Become a Host! 
+      </NavLink>
+      {isLoaded && sessionLinks}
       {/* </ul> */}
     </ul>
   );

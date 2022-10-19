@@ -37,24 +37,27 @@ function SpotDetail() {
 
   //dispatch review
   return (
-    <div>
-      <div className="title">
+    <div className="spot-detail-page">
+      <div className="spot-title">
         <h1>{spot.name}</h1>
         <p>
-          {spot.avgStarRating} | {spot.numReviews} reviews {spot.city}{" "}
-          {spot.state}
+          (stars) {spot.avgStarRating} • {spot.numReviews} reviews • {spot.city}
+          , {spot.state}
         </p>
       </div>
-      <div className="spot-photo">
-        <img src={spot.SpotImages[0].url} alt='spot-img'/>
-        </div>
-      <div className="description">
-        <p>{spot?.description}</p>
+      <div className="spot-photo-div">
+        <img src={spot.SpotImages[0].url} alt="spot-img" className="spot-photo"/>
+      </div>
+      <div className="spot-description">
+        <h2>
+          Entire Castle hosted by {spot.Owner.firstName} {spot.Owner.lastName}
+        </h2>
+        <p>50 guests • 12 bedrooms • 15 beds • 10 bathrooms </p>
       </div>
       <div className="reviews">
         <ReviewBrowser spotId={spotId} />
         <h4>
-            <AddReview />
+          <AddReview />
         </h4>
       </div>
     </div>

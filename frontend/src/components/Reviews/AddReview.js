@@ -31,26 +31,29 @@ function AddReview() {
     }
 
   return (
-    <div>
+    <div className='add-review-div'>
       <h2>Leave a review!</h2>
       <section>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='review-form-div'>
           <h4>Tell us about your experience!</h4>
           <input
+            className='review-text'
             type='textarea'
-            placeholder='Your Review'
+            placeholder='Write a Review'
             value={review}
             onChange={(e) => setReview(e.target.value)}
             />
-            <h4>Give us a rating!</h4>
+            <h3>Give us a rating!</h3>
             <input
+                className='rating-input'
                 type='number'
                 min='1'
                 max='5'
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
             />
-            <input type='submit' />
+            <br />
+            <input type='submit' className='rating-submit'/>
         </form>
       </section>
     </div>
