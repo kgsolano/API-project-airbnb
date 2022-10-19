@@ -6,8 +6,23 @@
     margin: 0;
     display: flex;
     justify-content: space-between;
+    align-content: center;
     flex-direction: row;
     width: 100%;
+}
+
+.add-spot-link {
+    align-self: center;
+    margin-left: 70%;
+    text-decoration: none;
+}
+.add-spot-link:visited {
+    text-decoration: none;
+    color: black;
+}
+.add-spot-link:active {
+    text-decoration: none;
+    color: black;
 }
 
 .home-logo {
@@ -24,18 +39,16 @@
 }
 
 .profile-btn {
-    /* float: right; */
-    /* margin-right: 20px; */
-    /* align-items: center; */
-   /* justify-self: end; */
-   height: 60px;
+
+  height: 60px;
    width: 120px;
    border-radius: 40px;
-   margin-right:50px ;
+   margin-right:50px;
+   font-size: 40px;
     align-self: center;
     justify-self: self-end;
 
-   background-color: transparent;
+   background-color: white;
    display: flex;
    flex-direction: row-reverse;
 }
@@ -48,13 +61,51 @@
 
 .profile-dropdown{
     position: absolute;
-    margin-left: 82%;
+    margin-left: 85%;
+    margin-top: 5%;
+    padding: 15px 10px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 1px 2px 2px black;
     
     /* border: 1px solid red; */
 }
 
-.profile-dropdown > li {
-    position: relative;
-    
-    
+.manage-user-link:visited {
+    text-decoration: none;
+    color: black
+}
+
+.manage-user-link:active {
+    text-decoration: none;
+}
+
+.manage-user-div {
+    padding: 0;
+}
+
+.manage-user-div:hover {
+    background-color: #a1454c;
+}
+
+.manage-user-link:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.manage-user-link:link {
+    text-decoration: none;
+}
+
+.log-out-button {
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 5px;
+    border: none;
+    color: #a1454c;
+}
+
+.profile-dropdown > div {
+    padding: 7px;
+    font-size: 13px;
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllReviews } from '../../store/reviews'
+import './reviews.css'
 
 function ReviewBrowser({spotId}) {
     const dispatch = useDispatch()
@@ -12,6 +13,7 @@ function ReviewBrowser({spotId}) {
      const reviewsObj = useSelector((state) => state.reviews.spot);
      if (!reviewsObj) return null;
      const reviews = Object.values(reviewsObj);
+     console.log('this is reviews -----', reviews)
     
     
     
@@ -23,11 +25,17 @@ function ReviewBrowser({spotId}) {
         // console.log('this is spotReviews ----->', spotReviews)
     // }
   return (
-    <div>
+    <div className='reviews-div'>
       <h2>Reviews</h2>
-      <ul>
+      <ul className='all-reviews-div'>
         {reviews &&
-          reviews.map((review) => <li key={review.id}>{review.review}</li>)}
+          reviews.map((review) => (
+            <ul key={review.id} className='review-id'>
+              <h3>{review.User.firstName} {review.User.lastName}</h3>
+              <p>{review.stars} stars</p>
+              <p>{review.review}</p>
+            </ul>
+          ))}
       </ul>
     </div>
   );

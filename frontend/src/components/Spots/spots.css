@@ -58,7 +58,7 @@
 
 
 .title > h4 {
-    float: left;
+    /* float: left; */
     display: inline-block;
     font-weight: bold;
     margin: 10px 0;
@@ -79,4 +79,62 @@
 
 .description > .description-price {
     font-weight: bold;
+}
+
+/* SPOT DETAIL PAGE */
+
+.spot-photo {
+    width: 80%;
+}
+
+.spot-detail-page {
+    width: 65%;
+}
+
+.spot-description > h2 {
+    margin: 10px 0;
+}
+
+.spot-description> p {
+    font-size: 14px;
+}
+
+.spot-description {
+    padding: 20px 0;
+    border-bottom: 1px solid grey;
+}
+
+/* ADD A SPOT FORM */
+
+.add-spot-form-div {
+    display: flex;
+    width: 50%;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.add-spot-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-self: center;
+    width: 100%;
+}
+
+.add-spot-form > input {
+    margin: 5px;
+    width: 60%;
+    height: 65px;
+    border-radius: 9px;
+    box-shadow: 2px 0 2px 1px rgb(128, 128, 128, 0.2);
+}
+
+.submit-btn {
+    border-radius: 5px;
+    background-color: #a1454b;
+    color: white;
+    font-size: 2rem;
+    height: 60px !important;
+    width: 40% !important;
 }

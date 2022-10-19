@@ -44,11 +44,11 @@ const SpotBrowser = () => {
             </div>
             </Link>
             )}
-            <Link to={'/spots/new'}>
+            {/* <Link to={'/spots/new'}>
                 <button>
                     Become a Host! (create spot)
                 </button>
-            </Link>
+            </Link> */}
         </div>
     )
 }

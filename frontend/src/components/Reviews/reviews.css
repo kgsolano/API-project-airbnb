@@ -1,0 +1,36 @@
+.reviews-div {
+    padding-bottom: 20px;
+    border-bottom: 1px solid grey;
+}
+
+.review-id>h3 {
+    text-decoration: underline;
+}
+
+.review-id>p {
+    font-size: 1rem;
+}
+
+.review-text {
+    width: 30%;
+    height: 90px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.rating-input {
+    margin-bottom: 15px;
+    height: 30px;
+    width: 35px;
+}
+
+.rating-submit {
+    background-color: transparent;
+        border-radius: 3px;
+        height: 30px;
+        width: 350px;
+        padding: 5px;
+        border: none;
+        background-color: #a1454c;
+        color: white
+}

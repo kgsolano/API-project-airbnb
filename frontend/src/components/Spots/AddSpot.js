@@ -51,8 +51,8 @@ function AddSpot() {
         console.log("this is a created spot", createdSpot)
     }
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
+    <section className='add-spot-form-div'>
+      <form onSubmit={handleSubmit} className='add-spot-form'>
         <h1>Add a Spot!</h1>
         <input
           type="text"
@@ -123,7 +123,7 @@ function AddSpot() {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           />
-        <input type="submit" />
+        <input type="submit" value='Create new spot' className='submit-btn' />
       </form>
     </section>
   );
