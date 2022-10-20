@@ -5,21 +5,24 @@ import { Link } from 'react-router-dom'
 import './spots.css'
 
 const SpotBrowser = () => {
+    const spotsObj = useSelector((state) => state.spots.allSpots)   // state/reducer/action.payload
+    const spots = Object.values(spotsObj)
+    console.log("this is the spots variable", spots)
     
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getAllSpots())
-    }, [dispatch])
+    }, [dispatch, spots.length])
+
 
     
-    const spotsObj = useSelector((state) => state.spots.allSpots)   // state/reducer/action.payload
     console.log("this is the spotsObj ---->", spotsObj)
     if(!spotsObj) return null
 
-    const spots = Object.values(spotsObj)
     
     
-    
+
   
     
     return (
@@ -35,7 +38,7 @@ const SpotBrowser = () => {
                 </img>
                 <div className='title'>
                     <h4>{spot.city}, {spot.state}</h4>
-                    <p>{spot.avgRating}</p>
+                    <p>{isNaN(spot.avgRating) ? 'No reviews yet' : spot.avgRating}</p>
                 </div>
                 <div className='description'>
                     <p className='description-text'>{spot.description}</p>

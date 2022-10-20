@@ -20,26 +20,38 @@ const validateResponse = [
   check("country")
     .exists({ checkFalsy: true })
     .withMessage("Country is required"),
-  check("lat")
-    .exists({ checkFalsy: true })
-    .isFloat()
-    .withMessage("Latitude is not valid"),
-  check("lng")
-    .exists({ checkFalsy: true })
-    .isFloat()
-    .withMessage("Longitude is not valid"),
+  // check("lat")
+  //   .exists({ checkFalsy: false })
+  //   .isFloat()
+  //   .withMessage("Latitude is not valid"),
+  // check("lng")
+  //   .exists({ checkFalsy: false })
+  //   .isFloat()
+  //   .withMessage("Longitude is not valid"),
   check("name")
     .exists({ checkFalsy: true })
-    .isLength({ max: 50 })
+    .isLength({ min: 0, max: 50 })
     .withMessage("Name must be less than 50 characters"),
   check("description")
     .exists({ checkFalsy: true })
     .withMessage("description is required"),
   check("price")
     .exists({ checkFalsy: true })
+    .isNumeric()
     .withMessage("price per day is required"),
+  // check("url")
+  //   .exists({ checkFalsy: true})
+  //   .isURL()
+  //   .withMessage("Please enter a valid URL"),
   handleValidationErrors,
 ];
+
+const validateURL = [
+  check("url")
+    .exists({ checkFalsy: true })
+    .isURL()
+    .withMessage("please enter a valid URL")
+]
 
 const validateReview = [
   check("review")
@@ -71,7 +83,11 @@ router.get("/current", requireAuth, async (req, res, next) => {
     });
 
     console.log(Spots.avgRating)
-    currentSpot.avgRating = avgRating[0].avgRating;
+    if(avgRating[0].avgRating === null){
+      currentSpot.avgRating = 'there are no reviews'
+    } else {
+      currentSpot.avgRating = avgRating[0].avgRating;
+    }
 
     const previewImages = await SpotImage.findAll({
       where: {
@@ -212,7 +228,12 @@ router.get("/:spotId", async (req, res, next) => {
   let dataJson = spotData.toJSON()
 
   dataJson.numReviews = reviewData[0].numReviews
-  dataJson.avgStarRating = reviewData[0].avgStarRating
+
+  if (reviewData[0].avgStarRating === null) {
+    dataJson.avgStarRating = "No reviews yet";
+  } else {
+    dataJson.avgStarRating = reviewData[0].avgStarRating;
+  }
 
   res.json(dataJson)
 
@@ -263,7 +284,11 @@ router.get("/", async (req, res, next) => {
     let numberWithDecimal = parseFloat(number).toFixed(1);
 
     //   console.log(numberWithDecimal);
-    currentSpot.avgRating = numberWithDecimal;
+    if(numberWithDecimal === null){
+      currentSpot.avgRating = "No reviews yet"
+    } else {
+      currentSpot.avgRating = numberWithDecimal;
+    }
     
 
 
@@ -405,7 +430,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
 
 
 //creating a spot
-router.post("/", requireAuth, async (req, res, next) => {
+router.post("/", requireAuth, validateResponse, async (req, res, next) => {
     
   const {
       
@@ -502,7 +527,7 @@ router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, ne
 })
 
 //create an image for a spot
-router.post("/:spotId/images", requireAuth, async (req, res, next) => {
+router.post("/:spotId/images", requireAuth, validateURL, async (req, res, next) => {
   const { url, preview } = req.body
   const spot = await Spot.findByPk(req.params.spotId)
 

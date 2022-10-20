@@ -21,27 +21,27 @@ function User() {
     const reviewsObj = useSelector((state) => state.reviews.user)
     if(!reviewsObj) return null
     const reviews = Object.values(reviewsObj)
-    console.log("this is reviews array ===>", reviews)
+    console.log('this is spots ---->', spots)
+
 
   return (
-    <div>
+    <div className="manage-user-div">
       <h2>All your spots</h2>
-      <ul>
+      <ul className="user-spots">
         {spots.map((spot) => (
-          <li key={spot.id}>
-            {spot.name}
-            <NavLink to={`/spots/${spot.id}/edit`}>Edit a spot</NavLink>
-          </li>
+          <ul key={spot.id}>
+            #{spot.id}: {spot.name}
+            <NavLink to={`/spots/${spot.id}/edit`} className="edit-link">
+              Edit a spot
+            </NavLink>
+          </ul>
         ))}
       </ul>
       <h2>All your reviews</h2>
-      <ul>
-      {reviews.map((review) => (
-        <UserReview
-            review={review}
-            key={review.id}
-            />
-      ))}
+      <ul className="user-reviews">
+        {reviews.map((review) => (
+          <UserReview review={review} key={review.id} />
+        ))}
       </ul>
     </div>
   );

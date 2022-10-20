@@ -31,7 +31,7 @@ function ReviewBrowser({spotId}) {
         {reviews &&
           reviews.map((review) => (
             <ul key={review.id} className='review-id'>
-              <h3>Review by {review.User.firstName}</h3>
+              <h3>Review by {review.User?.firstName}</h3>
               <p>{review.stars} stars</p>
               <p>{review.review}</p>
             </ul>

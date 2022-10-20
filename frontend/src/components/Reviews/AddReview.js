@@ -8,13 +8,18 @@ function AddReview() {
     const history = useHistory()
     const {spotId} = useParams()
     const user = useSelector((state) => state.session.user)
+    const spotReview = useSelector((state) => state.reviews.spot)
+    const spotReviewUser = Object.values(spotReview)
 
 
     const [review, setReview] = useState('')
     const [rating, setRating] = useState('')
+    const [errors, setErrors] = useState([])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+      
 
         const payload = {
             spotId,
@@ -22,16 +27,30 @@ function AddReview() {
             review,
             stars: rating
         }
-
-        let createdReview = dispatch(createReviewThunk(payload))
-        if (createdReview) {
-            history.push(`/spots/${spotId}`)
-            console.log("this is the payload", payload)
-        }
+        console.log('this is the conditional', !(user?.id === spotReviewUser[0]?.User.id));
+        if(!(user?.id === spotReviewUser[0]?.User.id)) {
+          setErrors([])
+          let createdReview = await dispatch(createReviewThunk(payload)).catch(
+            async (res) => {
+              const data = await res.json();
+              if (data && data.errors) setErrors(data.errors);
+            });
+            if (createdReview) {
+              history.push(`/spots/${spotId}`);
+            }
+          } else {
+            return setErrors(['User has already submitted a review for this spot'])
+          }
+            
     }
 
   return (
     <div className='add-review-div'>
+      <ul>
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
+      </ul>
       <h2>Leave a review!</h2>
       <section>
         <form onSubmit={handleSubmit} className='review-form-div'>

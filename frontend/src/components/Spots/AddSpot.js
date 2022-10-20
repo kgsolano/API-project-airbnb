@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { addSpotImgThunk, addSpotThunk } from '../../store/spots'
@@ -15,23 +15,47 @@ function AddSpot() {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [country, setCountry] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLng] = useState('')
+    // const [lat, setLat] = useState('')
+    // const [lng, setLng] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [url, setUrl] = useState('')
+    const [errors, setErrors] = useState([])
+    const [validationErrors, setValidationErrors] = useState([])
+    const [hasSubmitted, setHasSubmitted] = useState(false)
+
+    useEffect(() => {
+
+      const errors = []
+      if (!address.length) errors.push("address cannot be empty")
+      if (!city.length) errors.push("City cannot be empty")
+      if (!state.length) errors.push("State cannot be empty")
+      if (!country.length) errors.push("Country cannot be empty")
+      // if (lat !== typeof Number) errors.push("Please enter a valid number")
+      // if (lng !== typeof Number) errors.push("Please enter a valid number")
+      if (!name.length) errors.push("Please enter a valid name")
+      if (!description.length) errors.push("Description cannot be empty")
+      if (!price.match(/^\d+/)) errors.push("Price should be a valid number"); // NEED TO FIX
+      if (!url.includes(".")) errors.push("Please enter a valid url")
+
+      setValidationErrors(errors);
+    }, [address, city, state, country, name, description, price, url])
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        setHasSubmitted(true);
+        if (validationErrors.length) return alert('cannot submit')
         const payload = {
             address,
             city,
             state,
             country,
-            lat,
-            lng,
+            // lat,
+            // lng,
             name,
             description,
             price
@@ -43,16 +67,40 @@ function AddSpot() {
         }
 
         let createdSpot = await dispatch(addSpotThunk(payload))
+
         if (createdSpot) {
           // dispatch new url thunk
           dispatch(addSpotImgThunk(imgPayload, createdSpot.id))
             history.push('/')
         }
         console.log("this is a created spot", createdSpot)
+
+        // reset form state
+        setAddress("")
+        setCity("")
+        setState("")
+        setCountry("")
+        // setLat("")
+        // setLng("")
+        setName("")
+        setDescription("")
+        setPrice("")
+        setValidationErrors([])
+        setHasSubmitted(false)
     }
   return (
-    <section className='add-spot-form-div'>
-      <form onSubmit={handleSubmit} className='add-spot-form'>
+    <section className="add-spot-form-div">
+      {hasSubmitted && !!validationErrors.length && (
+        <div>
+          The following errors were found:
+          <ul>
+            {validationErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="add-spot-form">
         <h1>Add a Spot!</h1>
         <input
           type="text"
@@ -82,7 +130,7 @@ function AddSpot() {
           onChange={(e) => setCountry(e.target.value)}
         />
         <br />
-        <input
+        {/* <input
           type="text"
           placeholder="Latitude"
           value={lat}
@@ -95,7 +143,7 @@ function AddSpot() {
           value={lng}
           onChange={(e) => setLng(e.target.value)}
         />
-        <br />
+        <br /> */}
         <input
           type="text"
           placeholder="Name"
@@ -119,11 +167,11 @@ function AddSpot() {
         <br />
         <input
           type="text"
-          placeholder='URL'
+          placeholder="URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          />
-        <input type="submit" value='Create new spot' className='submit-btn' />
+        />
+        <input type="submit" value="Create new spot" className="submit-btn" />
       </form>
     </section>
   );

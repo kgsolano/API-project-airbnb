@@ -26,6 +26,7 @@ function EditSpotForm() {
      const [name, setName] = useState("");
      const [description, setDescription] = useState("");
      const [price, setPrice] = useState("");
+     const [errors, setErrors] = useState([])
 
      const handleSubmit = async (e) => {
        e.preventDefault();
@@ -42,7 +43,12 @@ function EditSpotForm() {
          price,
        };
 
-       let updatedSpot = await dispatch(editSpotThunk(payload, spotId));
+       let updatedSpot = await dispatch(editSpotThunk(payload, spotId)).catch(
+         async (res) => {
+           const data = await res.json();
+           if (data && data.errors) setErrors(data.errors);
+         }
+       );;
        if (updatedSpot) {
          history.push(`/current`);
        }
@@ -58,6 +64,11 @@ function EditSpotForm() {
 
   return (
     <section>
+      <ul>
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
+      </ul>
       <form onSubmit={handleSubmit}>
         <h1>Edit a Spot!</h1>
         <input
@@ -88,7 +99,7 @@ function EditSpotForm() {
           onChange={(e) => setCountry(e.target.value)}
         />
         <br />
-        <input
+        {/* <input
           type="text"
           placeholder="Latitude"
           value={lat}
@@ -101,7 +112,7 @@ function EditSpotForm() {
           value={lng}
           onChange={(e) => setLng(e.target.value)}
         />
-        <br />
+        <br /> */}
         <input
           type="text"
           placeholder="Name"
@@ -124,11 +135,9 @@ function EditSpotForm() {
         />
         <br />
         <input type="submit" />
-        <button 
-            type='button'
-            onClick={handleDelete}>
-                Delete this spot!
-            </button>
+        <button type="button" onClick={handleDelete}>
+          Delete this spot!
+        </button>
       </form>
     </section>
   );

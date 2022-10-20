@@ -65,12 +65,14 @@ export const getOneSpot = (id) => async dispatch => {
 
 // add a spot thunk
 export const addSpotThunk = (formInfo) => async dispatch => {
+    console.log("this is the formInfo", formInfo)
     const response = await csrfFetch("/api/spots", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formInfo),
     });
-
+    // console.log('this is new spot response', response)
+    
     if(response.ok){
         const newSpot = await response.json()
         dispatch(addSpot(newSpot))

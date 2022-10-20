@@ -89,9 +89,9 @@ login-modal-div {
     padding: 0;
 }
 
-.manage-user-div:hover {
+/* .manage-user-div:hover {
     background-color: #a1454c;
-}
+} */
 
 .manage-user-link:hover {
     text-decoration: none;
@@ -118,4 +118,86 @@ login-modal-div {
 .profile-dropdown > div {
     padding: 7px;
     font-size: 13px;
+}
+
+/* USER PAGE */
+
+.manage-user-div {
+    height: 80%;
+    /* width: 80%; */
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.manage-user-div > h2 {
+    align-self: center;
+}
+
+.user-spots > ul {
+    padding: 20px;
+}
+
+.edit-link {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #a1454c;
+    border: 1px solid #a1454c;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.user-review-div > ul {
+    padding: 20px;
+}
+
+.delete-review {
+    margin: 0 10px;
+    color: white;
+    background-color: #a1454c;
+    border: 1px solid #a1454c;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.modal-content {
+    margin: 100px;
+}
+
+.sign-in-form {
+    padding: 30px;
+}
+
+.log-in-form {
+    padding: 20px;
+}
+
+.sign-in-label {
+    font-weight: bold;
+}
+
+.sign-in-label > input {
+    margin: 10px 5px;
+    border-radius: 4px;
+    border: 1px solid grey;
+}
+
+.sign-in-btn {
+    display: inline-block;
+    margin: 4% 10%;
+    color: white;
+    background-color: #a1454c;
+    border: 1px solid black;
+    padding: 9px;
+    border-radius: 4px;
+}
+
+.log-in-btn {
+    display: inline-block;
+      
+        color: white;
+        background-color: #a1454c;
+        border: 1px solid black;
+        border-radius: 4px;
 }

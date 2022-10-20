@@ -8,6 +8,8 @@ function UserReview({review}) {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    console.log('this is review --->', review.Spot.id)
+
      const handleDelete = () => {
         let deletedReview = dispatch(deleteReviewThunk(review.id))
         if(deletedReview){
@@ -16,13 +18,13 @@ function UserReview({review}) {
     }
   return (
 
-    <div>
-      <li key={review.id}>
-        {review.review}
-        <button type="button" onClick={handleDelete}>
+    <div className='user-review-div'>
+      <ul key={review.id}>
+        Listing #{review.Spot.id}: {review.review}
+        <button type="button" onClick={handleDelete} className='delete-review'>
           Delete this review
         </button>
-      </li>
+      </ul>
     </div>
   );
 }
