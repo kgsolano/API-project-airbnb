@@ -32,6 +32,11 @@
     width: 50px; */
 }
 
+login-modal-div {
+    align-items: center;
+    color: white;
+}
+
 .logo-btn {
     width: 150px;
     height: 120px;
@@ -103,6 +108,11 @@
     padding: 5px;
     border: none;
     color: #a1454c;
+}
+
+.log-out-button:hover {
+    color: white;
+    background-color: #a1454c;
 }
 
 .profile-dropdown > div {
