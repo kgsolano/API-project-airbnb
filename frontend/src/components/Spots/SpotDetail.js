@@ -23,6 +23,15 @@ function SpotDetail() {
   // conditionally rendered spots
   if(!spot?.id) return null
   
+
+  let avgStarRating;
+  if (spot.avgStarRating === null){
+    avgStarRating = "0"
+  } else if (typeof spot.avgStarRating === 'number'){
+    avgStarRating = parseFloat(spot.avgStarRating).toFixed(1)
+  } else if (typeof Number(spot.avgStarRating) === 'number'){
+    avgStarRating = Number(parseFloat(spot.avgStarRating).toFixed(1))
+  }
   
 
   //conditionally rendered reviews

@@ -90,7 +90,7 @@ login-modal-div {
    background-color: white;
    display: flex;
    flex-direction: row-reverse;
-   z-index: 0;
+   cursor: pointer;
 }
 
 
@@ -140,6 +140,7 @@ login-modal-div {
     padding: 5px;
     border: none;
     color: #a1454c;
+    cursor: pointer;
 }
 
 .log-out-button:hover {
