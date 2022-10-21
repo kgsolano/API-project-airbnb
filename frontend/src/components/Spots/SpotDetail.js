@@ -24,14 +24,14 @@ function SpotDetail() {
   if(!spot?.id) return null
   
 
-  let avgStarRating;
-  if (spot?.avgStarRating === null){
-    avgStarRating = "0"
-  } else if (typeof spot?.avgStarRating === 'number'){
-    avgStarRating = parseFloat(spot?.avgStarRating).toFixed(1)
-  } else if (typeof Number(spot?.avgStarRating) === 'number'){
-    avgStarRating = Number(parseFloat(spot?.avgStarRating).toFixed(1))
-  }
+  // let avgStarRating;
+  // if (spot?.avgStarRating === null){
+  //   avgStarRating = "0"
+  // } else if (typeof spot?.avgStarRating === 'number'){
+  //   avgStarRating = parseFloat(spot?.avgStarRating).toFixed(1)
+  // } else if (typeof Number(spot?.avgStarRating) === 'number'){
+  //   avgStarRating = Number(parseFloat(spot?.avgStarRating).toFixed(1))
+  // }
   
 
   //conditionally rendered reviews
@@ -51,7 +51,7 @@ function SpotDetail() {
       <div className="spot-title">
         <h1>{spot.name}</h1>
         <p>
-          {spot.avgStarRating} <i className="fa-sharp fa-solid fa-star"></i> •{" "}
+          {spot?.avgStarRating} <i className="fa-sharp fa-solid fa-star"></i> •{" "}
           {spot.numReviews} reviews • {spot.city}, {spot.state}
         </p>
       </div>

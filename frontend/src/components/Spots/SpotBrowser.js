@@ -46,7 +46,7 @@ const SpotBrowser = () => {
                   </h4>
                   <p>
                     {isNaN(spot.avgRating) ? "No reviews yet" : spot.avgRating}{" "}
-                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i className="fa-sharp fa-solid fa-star"></i>
                   </p>
                 </div>
                 <div className="description">
