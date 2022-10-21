@@ -73,7 +73,7 @@ module.exports = {
           price: 300,
         },
         {
-          ownerId: 6,
+          ownerId: 1,
           address: "600 Shogun Rd",
           city: "Himeji",
           state: "Japan",
@@ -86,7 +86,7 @@ module.exports = {
           price: 10000,
         },
         {
-          ownerId: 7,
+          ownerId: 2,
           address: "700 Kingstown Rd",
           city: "Hillerød",
           state: "Denmark",
@@ -99,7 +99,7 @@ module.exports = {
           price: 9000,
         },
         {
-          ownerId: 8,
+          ownerId: 3,
           address: "800 Royal Rd.",
           city: "Andria",
           state: "Italy",
@@ -112,7 +112,7 @@ module.exports = {
           price: 7000,
         },
         {
-          ownerId: 9,
+          ownerId: 4,
           address: "900 Queens Garden Rd.",
           city: "Chambord",
           state: "France",
@@ -125,7 +125,7 @@ module.exports = {
           price: 5000,
         },
         {
-          ownerId: 10,
+          ownerId: 5,
           address: "1000 Prince Way.",
           city: "Delhi",
           state: "India",

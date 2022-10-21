@@ -23,7 +23,7 @@ module.exports = {
         },
         {
           spotId: 4,
-          url: "https://castle-vianden.lu/wp-content/uploads/2020/04/ViandenCastle_autumm-1-von-1-scaled.jpg",
+          url: "https://live.staticflickr.com/65535/50638588936_99b8e099de_z.jpg",
           preview: true,
         },
         {

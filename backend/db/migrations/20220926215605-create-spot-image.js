@@ -13,7 +13,7 @@ module.exports = {
         // references: {model: 'Spots'}
       },
       url: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       preview: {
         type: Sequelize.BOOLEAN

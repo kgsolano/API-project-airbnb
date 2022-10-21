@@ -46,12 +46,12 @@ const validateResponse = [
   handleValidationErrors,
 ];
 
-const validateURL = [
-  check("url")
-    .exists({ checkFalsy: true })
-    .isURL()
-    .withMessage("please enter a valid URL")
-]
+// const validateURL = [
+//   check("url")
+//     .exists({ checkFalsy: true })
+//     .isURL()
+//     .withMessage("please enter a valid URL")
+// ]
 
 const validateReview = [
   check("review")
@@ -527,7 +527,7 @@ router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, ne
 })
 
 //create an image for a spot
-router.post("/:spotId/images", requireAuth, validateURL, async (req, res, next) => {
+router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   const { url, preview } = req.body
   const spot = await Spot.findByPk(req.params.spotId)
 
