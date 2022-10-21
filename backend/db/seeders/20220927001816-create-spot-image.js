@@ -23,12 +23,12 @@ module.exports = {
         },
         {
           spotId: 4,
-          url: "https://th-thumbnailer.cdn-si-edu.com/Yq_crW-TdiCFYJ6NEm6QlpxUKDE=/1000x750/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/31/e7/31e70d69-a3b2-4823-9097-2176fd515da6/neuschwanstein-castle.jpg",
+          url: "https://castle-vianden.lu/wp-content/uploads/2020/04/ViandenCastle_autumm-1-von-1-scaled.jpg",
           preview: true,
         },
         {
           spotId: 5,
-          url: "https://www.brides.com/thmb/ituJ-qXMRfMhH0AUUWSqrbxunIA=/3744x2808/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__brides__proteus__5af9c06d368ea641e4c3a24d__11-75c2514d4c5c4dca921c0f35f2621c86.jpeg",
+          url: "https://bigseventravel.com/wp-content/uploads/2021/07/Bran-Castle.jpg",
           preview: true,
         },
         {
@@ -37,17 +37,17 @@ module.exports = {
         },
         {
           spotId: 7,
-          url: "https://img.atlasobscura.com/jBTC176E5JlV1WXosjCE4XwfOk9KutDlwC0VHsVD7k0/rt:fit/h:390/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy8wYjcz/NDdjNi01ZjBjLTQy/MTktOWU1Zi0yYTEy/YTE1Y2MxYzI4ZGJj/ODgyNTk0MzRiOWMx/NGFfMTUxNXB4LUZy/ZWRlcmlrc2Jvcmdf/Y2FzdGxlXy1fcGFu/b3JhbWlvXygxNSkg/KDEpLmpwZw.jpg",
+          url: "https://as1.ftcdn.net/v2/jpg/04/45/65/66/1000_F_445656654_jYurZBcIAmMDy8L5mOD4VLHZwp6rAcG5.jpg",
           preview: true,
         },
         {
           spotId: 8,
-          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/italy-apulia-andria-castel-del-monte-news-photo-1575309859.jpg",
+          url: "https://cdn.getyourguide.com/img/location/5e0dde531016d-wide.jpeg/99.jpg",
           preview: true,
         },
         {
           spotId: 9,
-          url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/the-chateau-de-chambord-castle-unesco-world-heritage-site-news-photo-1575309440.jpg",
+          url: "https://ychef.files.bbci.co.uk/976x549/p086hwfw.jpg",
           preview: true,
         },
         {
