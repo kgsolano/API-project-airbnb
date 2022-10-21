@@ -11,6 +11,31 @@
     width: 100%;
 }
 
+.login-modals {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    margin-right: 3%;
+}
+
+.sign-up-modal {
+    background-color: #a1454c;
+    border: 1px solid #a1454c;
+    border-radius: 4px;
+    padding: 9px;
+    color: white;
+    margin: 0 15px;
+}
+
+.login-modal {
+    background-color: #a1454c;
+        border: 1px solid #a1454c;
+        border-radius: 4px;
+        padding: 9px;
+         color: white;
+         
+}
+
 .add-spot-link {
     align-self: center;
     margin-left: 70%;
@@ -43,6 +68,10 @@ login-modal-div {
     /* align-items: center; */
 }
 
+.profile-btn-div {
+    width: 400px;
+}
+
 .profile-btn {
 
   height: 40%;
@@ -61,6 +90,7 @@ login-modal-div {
    background-color: white;
    display: flex;
    flex-direction: row-reverse;
+   z-index: 0;
 }
 
 

@@ -17,6 +17,17 @@ function User() {
     }, [dispatch])
 
     const spots = useSelector((state) => Object.values(state.spots.allSpots));
+    const sessionUser = useSelector(state => state.session.user)
+
+    console.log("this is session user --", sessionUser)
+    console.log("this is the all the spots --->", spots)
+
+    // if (sessionUser.id === spot.ownerId)
+    const filteredSpots = spots.filter((spot) => (
+      spot.ownerId === sessionUser.id
+    ))
+
+    console.log("this is filteredspots", filteredSpots)
     
     const reviewsObj = useSelector((state) => state.reviews.user)
     if(!reviewsObj) return null
@@ -28,14 +39,14 @@ function User() {
     <div className="manage-user-div">
       <h2>All your spots</h2>
       <ul className="user-spots">
-        {spots.map((spot) => (
+        {filteredSpots.map((spot) => (
           <ul key={spot.id}>
             #{spot.id}: {spot.name}
             <NavLink to={`/spots/${spot.id}/edit`} className="edit-link">
               Edit a spot
             </NavLink>
-          </ul>
-        ))}
+          </ul> 
+        ))} 
       </ul>
       <h2>All your reviews</h2>
       <ul className="user-reviews">

@@ -32,8 +32,8 @@ function AddReview() {
             review,
             stars: rating
         }
-        console.log('this is the conditional', !(user?.id === spotReviewUser[0]?.User.id));
-        if(!(user?.id === spotReviewUser[0]?.User.id)) {
+        // console.log('this is the conditional', !(user?.id === spotReviewUser[0]?.User.id));
+        if(!(user?.id === spotReviewUser[0]?.User?.id)) {
           setErrors([])
           let createdReview = await dispatch(createReviewThunk(payload)).catch(
             async (res) => {
