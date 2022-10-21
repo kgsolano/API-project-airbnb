@@ -134,7 +134,51 @@
     border-radius: 5px;
     background-color: #a1454b;
     color: white;
-    font-size: 2rem;
+    font-size: 1rem;
     height: 60px !important;
     width: 40% !important;
+}
+
+
+.edit-spot-form-div {
+    display: flex;
+        width: 50%;
+        flex-direction: column-reverse;
+        align-items: center;
+}
+
+.edit-spot-form {
+    display: flex;
+        width: 50%;
+        flex-direction: column;
+        align-items: center;
+}
+
+.edit-spot-form>input {
+    margin: 5px;
+    width: 60%;
+    height: 65px;
+    border-radius: 9px;
+    border: 1px solid black;
+    box-shadow: 2px 0 2px 1px rgb(128, 128, 128, 0.2);
+}
+
+.delete-btn {
+    margin: 5px;
+        width: 60%;
+        height: 65px;
+        border-radius: 9px;
+        border: 1px solid black;
+        box-shadow: 2px 0 2px 1px rgb(128, 128, 128, 0.2);
+        border-radius: 5px;
+        
+            background-color: #a1454b;
+            color: white;
+            font-size: 2rem;
+            height: 60px !important;
+            width: 40% !important;
+}
+
+.delete-text {
+    font-size: 1rem;
 }

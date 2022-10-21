@@ -63,13 +63,13 @@ function EditSpotForm() {
      }
 
   return (
-    <section>
+    <section className="edit-spot-form-div">
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="edit-spot-form">
         <h1>Edit a Spot!</h1>
         <input
           type="text"
@@ -134,9 +134,10 @@ function EditSpotForm() {
           onChange={(e) => setPrice(e.target.value)}
         />
         <br />
-        <input type="submit" />
-        <button type="button" onClick={handleDelete}>
-          Delete this spot!
+        <input type="submit" className="submit-btn">
+        </input>
+        <button type="button" onClick={handleDelete} className="submit-btn">
+          <p className='delete-text'>Delete this spot!</p>
         </button>
       </form>
     </section>
