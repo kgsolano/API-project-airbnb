@@ -42,39 +42,39 @@ module.exports = {
           hashedPassword: bcrypt.hashSync("password5"),
         },
         {
-          email: "user4@user.io",
+          email: "user5@user.io",
           username: "FakeUser5",
           firstName: "Brad",
           lastName: "Pitt",
-          hashedPassword: bcrypt.hashSync("password5"),
+          hashedPassword: bcrypt.hashSync("password6"),
         },
         {
-          email: "user4@user.io",
+          email: "user6@user.io",
           username: "FakeUser6",
           firstName: "Sebastian",
           lastName: "Duck",
-          hashedPassword: bcrypt.hashSync("password5"),
+          hashedPassword: bcrypt.hashSync("password7"),
         },
         {
-          email: "user4@user.io",
+          email: "user7@user.io",
           username: "FakeUser7",
           firstName: "Brin",
           lastName: "West",
-          hashedPassword: bcrypt.hashSync("password5"),
+          hashedPassword: bcrypt.hashSync("password8"),
         },
         {
-          email: "user4@user.io",
+          email: "user8@user.io",
           username: "FakeUser8",
           firstName: "Allen",
           lastName: "Kennan",
-          hashedPassword: bcrypt.hashSync("password5"),
+          hashedPassword: bcrypt.hashSync("password9"),
         },
         {
-          email: "user4@user.io",
+          email: "user9@user.io",
           username: "FakeUser9",
           firstName: "Ben",
           lastName: "Viet",
-          hashedPassword: bcrypt.hashSync("password5"),
+          hashedPassword: bcrypt.hashSync("password10"),
         },
       ],
       {}
@@ -86,7 +86,20 @@ module.exports = {
     return queryInterface.bulkDelete(
       "Users",
       {
-        username: { [Op.in]: ["Demo-lition", "FakeUser3", "FakeUser4", "FakeUser1", "FakeUser2"] },
+        username: {
+          [Op.in]: [
+            "Demo-lition",
+            "FakeUser3",
+            "FakeUser4",
+            "FakeUser1",
+            "FakeUser2",
+            "FakeUser5",
+            "FakeUser6",
+            "FakeUser7",
+            "FakeUser8",
+            "FakeUser9",
+          ],
+        },
       },
       {}
     );
