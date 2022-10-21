@@ -232,7 +232,7 @@ router.get("/:spotId", async (req, res, next) => {
   if (reviewData[0].avgStarRating === null) {
     dataJson.avgStarRating = "No reviews yet";
   } else {
-    dataJson.avgStarRating = reviewData[0].avgStarRating;
+    dataJson.avgStarRating = parseFloat(reviewData[0].avgStarRating).toFixed(1);
   }
 
   res.json(dataJson)
