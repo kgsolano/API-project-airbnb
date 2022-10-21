@@ -51,6 +51,8 @@ function AddReview() {
             return setErrors(['User has already submitted a review for this spot'])
           }
             
+          setReview("")
+          setRating("")
     }
 
   return (

@@ -39,7 +39,7 @@ console.log('this is reviews -----', reviews)
               <p>
                 {review.stars} <i className="fa-sharp fa-solid fa-star"></i>
               </p>
-              <p>{review.review}</p>
+              <p className='review-text-browser'>{review.review}</p>
             </ul>
           ))}
       </ul>
