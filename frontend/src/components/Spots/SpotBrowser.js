@@ -45,7 +45,7 @@ const SpotBrowser = () => {
                     {spot.city}, {spot.state}
                   </h4>
                   <p>
-                    {isNaN(spot.avgRating) ? "No reviews yet" : spot.avgRating}{" "}
+                    {isNaN(spot.avgRating) ? "No reviews yet" : spot.avgRating.toFixed(2)}{" "}
                     <i class="fa-sharp fa-solid fa-star"></i>
                   </p>
                 </div>
