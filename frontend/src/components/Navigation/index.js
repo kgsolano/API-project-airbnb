@@ -33,11 +33,12 @@ function Navigation({ isLoaded }) {
           className="logo-btn"
         />
       </NavLink>
+      {sessionUser &&
       <NavLink to={"/spots/new"} className='add-spot-link'>
         Become a Host! 
       </NavLink>
+        }
       {isLoaded && sessionLinks}
-      {/* </ul> */}
     </ul>
   );
 }

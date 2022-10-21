@@ -8,6 +8,7 @@ import { getAllReviews } from "../../store/reviews";
 
 function SpotDetail() {
   const { spotId } = useParams();
+  const sessionUser = useSelector(state => state.session.user)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -57,13 +58,16 @@ function SpotDetail() {
           Entire Castle hosted by {spot.Owner.firstName} {spot.Owner.lastName}
         </h2>
         <p>50 guests • 12 bedrooms • 15 beds • 10 bathrooms </p>
+        <p>{spot.description}</p>
       </div>
+      {sessionUser && 
       <div className="reviews">
         <ReviewBrowser spotId={spotId} />
         <h4>
           <AddReview />
         </h4>
       </div>
+          }     
     </div>
   );
 }

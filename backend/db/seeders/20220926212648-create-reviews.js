@@ -36,6 +36,36 @@ module.exports = {
           review: "Would not recommend",
           stars: 2,
         },
+        {
+          spotId: 6,
+          userId: 6,
+          review: "Huge place!",
+          stars: 4,
+        },
+        {
+          spotId: 7,
+          userId: 7,
+          review: "Perfect place for our wedding!",
+          stars: 5,
+        },
+        {
+          spotId: 8,
+          userId: 8,
+          review: "We lived like royalty this weekend!",
+          stars: 5,
+        },
+        {
+          spotId: 9,
+          userId: 9,
+          review: "A little bit too overwhelming for our party of 3",
+          stars: 3,
+        },
+        {
+          spotId: 10,
+          userId: 10,
+          review: "Loved every minute we were here. Would rent this castle again",
+          stars: 5,
+        },
       ],
       {}
     );

@@ -86,7 +86,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
     if(avgRating[0].avgRating === null){
       currentSpot.avgRating = 'there are no reviews'
     } else {
-      currentSpot.avgRating = avgRating[0].avgRating;
+      currentSpot.avgRating = avgRating[0].avgRating.toFixed(1);
     }
 
     const previewImages = await SpotImage.findAll({

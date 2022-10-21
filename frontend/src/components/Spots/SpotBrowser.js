@@ -50,7 +50,7 @@ const SpotBrowser = () => {
                   </p>
                 </div>
                 <div className="description">
-                  <p className="description-text">{spot.description}</p>
+                  <p className="description-text">{spot.name}</p>
                   <p className="description-price">${spot.price} per night</p>
                 </div>
               </div>
