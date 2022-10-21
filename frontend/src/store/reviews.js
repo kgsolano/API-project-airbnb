@@ -49,7 +49,8 @@ export const getAllUserReviews = () => async (dispatch) => {
   const response = await csrfFetch(`/api/reviews/current`); 
 
   if (response.ok) {
-    const userReviews = await response.json();
+      const userReviews = await response.json();
+      console.log("this is user reviews --->", userReviews)
     dispatch(loadUserReviews(userReviews));
   }
 };
@@ -100,13 +101,13 @@ export default function ReviewsReducer(state = initialState, action) {
             })
             return loadState
         case LOAD_USER:
-            const loadUserState = {user: {}}
+            const loadUserState = {...state, user: {...state.user}}
             action.allReviews.Reviews.forEach((review) => {
                 loadUserState.user[review.id] = review
             })
             return loadUserState
         case CREATE:
-            const addState = {...state, spot:{...state.spot}}
+            const addState = {...state, spot:{...state.spot}, user:{...state.user}}
             addState.spot[action.review.id] = action.review
             return addState
         case DELETE:

@@ -26,34 +26,43 @@ const SpotBrowser = () => {
   
     
     return (
-        <div className='spot-browser-div'>
-           {spots && spots.map((spot) =>
-           <Link to={`/spots/${spot.id}`} key={spot.id} className='link-wrapper'>
-            <div className='spot-card'>
+      <div className="spot-browser-div">
+        {spots &&
+          spots.map((spot) => (
+            <Link
+              to={`/spots/${spot.id}`}
+              key={spot.id}
+              className="link-wrapper"
+            >
+              <div className="spot-card">
                 <img
-                    src={spot.previewImage}
-                    alt='castleImg'
-                    className='spot-img'
-                >
-                </img>
-                <div className='title'>
-                    <h4>{spot.city}, {spot.state}</h4>
-                    <p>{isNaN(spot.avgRating) ? 'No reviews yet' : spot.avgRating}</p>
+                  src={spot.previewImage}
+                  alt="castleImg"
+                  className="spot-img"
+                ></img>
+                <div className="title">
+                  <h4>
+                    {spot.city}, {spot.state}
+                  </h4>
+                  <p>
+                    {isNaN(spot.avgRating) ? "No reviews yet" : spot.avgRating}{" "}
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                  </p>
                 </div>
-                <div className='description'>
-                    <p className='description-text'>{spot.description}</p>
-                    <p className='description-price'>${spot.price} per night</p>
+                <div className="description">
+                  <p className="description-text">{spot.description}</p>
+                  <p className="description-price">${spot.price} per night</p>
                 </div>
-            </div>
+              </div>
             </Link>
-            )}
-            {/* <Link to={'/spots/new'}>
+          ))}
+        {/* <Link to={'/spots/new'}>
                 <button>
                     Become a Host! (create spot)
                 </button>
             </Link> */}
-        </div>
-    )
+      </div>
+    );
 }
 
 export default SpotBrowser

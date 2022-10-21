@@ -33,18 +33,23 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu} className='profile-btn'>
+      <button onClick={openMenu} className="profile-btn">
         <i className="fas fa-user-circle profile-pic" />
+        <i className="fas fa-bars" />
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
           <div>Welcome {user.username}</div>
           <div>{user.email}</div>
           <div className="manage-user-div">
-          <Link to="/current" className="manage-user-link">Manage user</Link>
+            <Link to="/current" className="manage-user-link">
+              Manage user
+            </Link>
           </div>
           <div>
-            <button onClick={logout} className='log-out-button'>Log Out</button>
+            <button onClick={logout} className="log-out-button">
+              Log Out
+            </button>
           </div>
           {/* <Link to={`/spots/${spotId}/edit`}>Manage your Spots</Link> */}
         </ul>

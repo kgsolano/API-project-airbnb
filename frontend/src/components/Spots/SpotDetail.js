@@ -41,12 +41,16 @@ function SpotDetail() {
       <div className="spot-title">
         <h1>{spot.name}</h1>
         <p>
-          (stars) {spot.avgStarRating} • {spot.numReviews} reviews • {spot.city}
-          , {spot.state}
+          {spot.avgStarRating} <i className="fa-sharp fa-solid fa-star"></i> •{" "}
+          {spot.numReviews} reviews • {spot.city}, {spot.state}
         </p>
       </div>
       <div className="spot-photo-div">
-        <img src={spot.SpotImages[0].url} alt="spot-img" className="spot-photo"/>
+        <img
+          src={spot.SpotImages[0].url}
+          alt="spot-img"
+          className="spot-photo"
+        />
       </div>
       <div className="spot-description">
         <h2>

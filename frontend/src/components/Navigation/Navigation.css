@@ -45,29 +45,30 @@ login-modal-div {
 
 .profile-btn {
 
-  height: 60px;
-   width: 120px;
+  height: 40%;
+   width: 7%;
+   padding: 0.5%;
+   border: 1px solid #a1454c;
+   color: #a1454c;
    border-radius: 40px;
    margin-right:50px;
+   margin-left: 15px;
    font-size: 40px;
     align-self: center;
     justify-self: self-end;
-
+    justify-content:space-between;
+    align-items: center;
    background-color: white;
    display: flex;
    flex-direction: row-reverse;
 }
 
-.profile-pic {
-    /* size: 90px; */
-    /* width: 40px; */
-    height: 20px;
-}
+
 
 .profile-dropdown{
     position: absolute;
     margin-left: 85%;
-    margin-top: 5%;
+    margin-top: 6%;
     padding: 15px 10px;
     background-color: white;
     border-radius: 4px;
@@ -95,6 +96,7 @@ login-modal-div {
 
 .manage-user-link:hover {
     text-decoration: none;
+    background-color: #a1454c;
     color: white;
 }
 

@@ -3,6 +3,14 @@
     border-bottom: 1px solid grey;
 }
 
+.review-id {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    border: 0.5px solid grey;
+    box-shadow: 0.5px 0.5px grey;
+}
+
 .review-id>h3 {
     text-decoration: underline;
 }
@@ -15,6 +23,7 @@
     width: 30%;
     height: 90px;
     box-sizing: border-box;
+    border: 1px solid grey;
     border-radius: 4px;
 }
 
@@ -33,4 +42,13 @@
         border: none;
         background-color: #a1454c;
         color: white
+}
+
+.fa-user{
+    color:#a1454c;
+    margin-right: 4px;
+}
+
+.fa-star {
+    color: #a1454c;
 }
