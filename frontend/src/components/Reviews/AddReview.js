@@ -36,7 +36,7 @@ function AddReview() {
         }
         // console.log('this is the conditional', !(user?.id === spotReviewUser[0]?.User.id));
 
-        if( !(spotOwner === user?.id)) return setErrors(["User cannot submit a review for a spot they own"]);
+        // if( !(spotOwner === user?.id)) return setErrors(["User cannot submit a review for a spot they own"]);
 
         if (
           !(user?.id === spotReviewUser[0]?.User?.id)) {
