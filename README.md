@@ -5,7 +5,11 @@
 
 ## An Airbnb clone
 
-CastleBnB is an Airbnb fullstack application clone designed to mimic the functionalities of the original site. This site can be used to discover  new spots to book your next virtual vacation! 
+CastleBnB is an Airbnb fullstack application clone designed to mimic the functionalities of the original site. This site can be used to discover majestic castles to enhance your stay. Book your next virtual vacation with CastleBnB! 
+
+## Navigation
+
+Please log in by either signing up, logging in, or logging in as a demo user. Once logged in you will be able to explore the site's full functionality for creating a listing, editing a listing, and/or managing reviews. Bookings are coming soon! 
 
 ## API Routes Documentation
 
