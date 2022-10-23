@@ -53,9 +53,10 @@ As a logged in user you also have the ability to see reviews for a listing as we
 To clone this repo locally and access the website on your local machine please follow the guide below: 
 
 * Copy the link found on this repo and clone it into your preferred IDE 
+* ```npm install ``` into both the backend and frontend folders
 * Create a .env file similar to the example .env file seen in the code
-* cd into the backend folder and run "npm start" - backend should be started and listening on port 8001
-* cd into the frontend folder and run "npm start" - frontend should be started and listening on port 3000
+* cd into the backend folder and run ```npm start``` - backend should be started and listening on port 8001
+* cd into the frontend folder and run ```npm start``` - frontend should be started and listening on port 3000
 * If there are issues starting the repo please ensure all the steps above have been followed.
 
 ## API Routes Documentation
