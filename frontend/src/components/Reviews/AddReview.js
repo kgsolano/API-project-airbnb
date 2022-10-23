@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { createReviewThunk, getAllReviews, getAllUserReviews } from '../../store/reviews'
+import { getOneSpot } from '../../store/spots'
 
 function AddReview() {
     const dispatch = useDispatch()
@@ -53,6 +54,7 @@ function AddReview() {
           if (createdReview) {
             history.push(`/spots/${spotId}`);
             dispatch(getAllReviews(spotId));
+            dispatch(getOneSpot(spotId))
           }
         } else {
           return setErrors([

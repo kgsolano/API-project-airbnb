@@ -13,7 +13,10 @@ function SpotDetail() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllReviews(spotId));
-    dispatch(getOneSpot(spotId));
+    
+    setTimeout(() => {
+      dispatch(getOneSpot(spotId));
+    }, 100)
   }, [dispatch, spotId]);
   
   // const reviewsObj = useSelector((state) => state.reviews.user);
