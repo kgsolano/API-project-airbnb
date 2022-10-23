@@ -13,21 +13,21 @@ function User() {
     
     useEffect(() => {
         dispatch(getAllUserReviews())
-        console.log("is this working")
+        // console.log("is this working")
     }, [dispatch])
 
     const spots = useSelector((state) => Object.values(state.spots.allSpots));
     const sessionUser = useSelector(state => state.session.user)
 
-    console.log("this is session user --", sessionUser)
-    console.log("this is the all the spots --->", spots)
+    // console.log("this is session user --", sessionUser)
+    // console.log("this is the all the spots --->", spots)
 
     // if (sessionUser.id === spot.ownerId)
     const filteredSpots = spots.filter((spot) => (
       spot.ownerId === sessionUser.id
     ))
 
-    console.log("this is filteredspots", filteredSpots)
+    // console.log("this is filteredspots", filteredSpots)
     
     const reviewsObj = useSelector((state) => state.reviews.user)
     if(!reviewsObj) return null
@@ -59,11 +59,13 @@ function User() {
         </ul>
       )}
       <h2>All your reviews</h2>
+      {!reviews.length ? <h3 className='user-spot-text'>You have not made any reviews yet</h3> :
       <ul className="user-reviews">
         {reviews.map((review) => (
           <UserReview review={review} key={review.id} />
         ))}
       </ul>
+    }
     </div>
   );
 }

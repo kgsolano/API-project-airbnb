@@ -1,14 +1,15 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { deleteReviewThunk } from '../../store/reviews'
+import { deleteReviewThunk, getAllUserReviews } from '../../store/reviews'
 
 
 function UserReview({review}) {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    console.log('this is review spot --->', review)
+
+    console.log('this is review array --->', review)
 
      const handleDelete = () => {
         let deletedReview = dispatch(deleteReviewThunk(review.id))
@@ -18,9 +19,7 @@ function UserReview({review}) {
     }
   return (
     <div className="user-review-div">
-      {!review.length ? (
         <h3 className="user-spot-text">You have not made a review yet</h3>
-      ) : (
         <ul key={review.id}>
           {review.Spot.name}: {review.review}
           <button
@@ -31,7 +30,6 @@ function UserReview({review}) {
             Delete this review
           </button>
         </ul>
-      )}
     </div>
   );
 }
