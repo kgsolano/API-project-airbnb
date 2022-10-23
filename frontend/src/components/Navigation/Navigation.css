@@ -234,3 +234,15 @@ login-modal-div {
         border: 1px solid black;
         border-radius: 4px;
 }
+
+.user-img {
+    height: 20%;
+    width: 20%;
+    margin: 1%;
+    border-radius: 4px;
+}
+
+.user-spot-text {
+    color: #a1454c;
+    align-self: center;
+}

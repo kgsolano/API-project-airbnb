@@ -4,28 +4,29 @@ import { useParams } from 'react-router-dom'
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { deleteSpotThunk, editSpotThunk, getAllSpots } from '../../store/spots';
+import { deleteSpotThunk, editSpotThunk, getAllSpots, getOneSpot } from '../../store/spots';
 
 function EditSpotForm() {
     const {spotId} = useParams()
-    // const spot = useSelector(state => state.spots.singleSpot)
+    const spot = useSelector(state => state.spots.singleSpot)
+    console.log("this is edit spot",spot)
      const dispatch = useDispatch();
      const history = useHistory();
 
     useEffect(() => {
-        dispatch(getAllSpots())
+        dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
 
      // useState for the form values
-     const [address, setAddress] = useState("");
-     const [city, setCity] = useState("");
-     const [state, setState] = useState("");
-     const [country, setCountry] = useState("");
-     const [lat, setLat] = useState("");
+     const [address, setAddress] = useState(spot.address);
+     const [city, setCity] = useState(spot.city);
+     const [state, setState] = useState(spot.state);
+     const [country, setCountry] = useState(spot.country);
+     const [lat, setLat] = useState('');
      const [lng, setLng] = useState("");
-     const [name, setName] = useState("");
-     const [description, setDescription] = useState("");
-     const [price, setPrice] = useState("");
+     const [name, setName] = useState(spot.name);
+     const [description, setDescription] = useState(spot.description);
+     const [price, setPrice] = useState(spot.price);
      const [errors, setErrors] = useState([])
 
      const handleSubmit = async (e) => {
