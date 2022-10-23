@@ -52,7 +52,7 @@ function SpotDetail() {
         <h1>{spot.name}</h1>
         <p>
           {spot?.avgStarRating} <i className="fa-sharp fa-solid fa-star"></i> •{" "}
-          {spot.numReviews} reviews • {spot.city}, {spot.state}
+          {spot?.numReviews} reviews • {spot.city}, {spot.state}
         </p>
       </div>
       <div className="spot-photo-div">

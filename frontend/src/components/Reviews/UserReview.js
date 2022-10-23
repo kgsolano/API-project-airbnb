@@ -19,7 +19,6 @@ function UserReview({review}) {
     }
   return (
     <div className="user-review-div">
-        <h3 className="user-spot-text">You have not made a review yet</h3>
         <ul key={review.id}>
           {review.Spot.name}: {review.review}
           <button
