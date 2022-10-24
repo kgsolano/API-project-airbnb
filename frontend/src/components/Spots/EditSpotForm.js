@@ -9,7 +9,7 @@ import { deleteSpotThunk, editSpotThunk, getAllSpots, getOneSpot } from '../../s
 function EditSpotForm() {
     const {spotId} = useParams()
     const spot = useSelector(state => state.spots.singleSpot)
-    console.log("this is edit spot",spot)
+    // console.log("this is edit spot",spot)
      const dispatch = useDispatch();
      const history = useHistory();
 
@@ -60,7 +60,7 @@ function EditSpotForm() {
 
      const handleDelete = () => {
         let deletedSpot =  dispatch(deleteSpotThunk(spotId))
-        console.log(spotId)
+        // console.log(spotId)
         if(deletedSpot ) {
             history.push(`/`)
         }

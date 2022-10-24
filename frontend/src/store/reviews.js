@@ -50,7 +50,7 @@ export const getAllUserReviews = () => async (dispatch) => {
 
   if (response.ok) {
       const userReviews = await response.json();
-      console.log("this is user reviews --->", userReviews)
+    //   console.log("this is user reviews --->", userReviews)
     dispatch(loadUserReviews(userReviews));
   }
 };
@@ -64,9 +64,9 @@ export const createReviewThunk = (formInfo) => async dispatch => {
     })
 
     if(response.ok){
-        console.log("this is the response", response)
+        // console.log("this is the response", response)
         const newReview = await response.json()
-        console.log("this is new review", newReview)
+        // console.log("this is new review", newReview)
         dispatch(createReview(newReview))
         return newReview
     }

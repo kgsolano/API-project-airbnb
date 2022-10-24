@@ -9,7 +9,7 @@ function UserReview({review}) {
     const history = useHistory()
 
 
-    console.log('this is review array --->', review)
+    // console.log('this is review array --->', review)
 
      const handleDelete = () => {
         let deletedReview = dispatch(deleteReviewThunk(review.id))

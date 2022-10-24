@@ -66,7 +66,7 @@ export const getOneSpot = (id) => async dispatch => {
 
 // add a spot thunk
 export const addSpotThunk = (formInfo) => async dispatch => {
-    console.log("this is the formInfo", formInfo)
+    // console.log("this is the formInfo", formInfo)
     const response = await csrfFetch("/api/spots", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -104,10 +104,10 @@ export const editSpotThunk = (data, id) => async dispatch => {
         headers : {"Content-Type": "application/json"},
         body: JSON.stringify(data),
     })
-    console.log("this response is working", response)
+    // console.log("this response is working", response)
     if(response.ok) {
         const editSpot = await response.json()
-        console.log("this is the edit a spot message", editSpot)
+        // console.log("this is the edit a spot message", editSpot)
         dispatch(addSpot(editSpot))
         return editSpot
     }

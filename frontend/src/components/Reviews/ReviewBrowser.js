@@ -14,7 +14,7 @@ function ReviewBrowser({spotId}) {
 // const reviews = useSelector((state) => Object.values(state.reviews.spot))
 if (!reviewsObj) return null;
 const reviews = Object.values(reviewsObj);
-console.log('this is reviews -----', reviews)
+// console.log('this is reviews -----', reviews)
 
     
     

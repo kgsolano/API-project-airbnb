@@ -22,7 +22,7 @@ function SpotDetail() {
   
   // const reviewsObj = useSelector((state) => state.reviews.user);
   const spot = useSelector((state) => state?.spots?.singleSpot);
-  console.log(spot)
+  // console.log(spot)
 
   // conditionally rendered spots
   if(!spot?.id) return null

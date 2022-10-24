@@ -10,7 +10,7 @@ function AddReview() {
     const {spotId} = useParams()
     const user = useSelector((state) => state.session.user)
     const spotOwner = useSelector(state => state.spots.singleSpot.ownerId)
-    console.log('this is spotOwner --->', spotOwner )
+    // console.log('this is spotOwner --->', spotOwner )
     const spotReview = useSelector((state) => state.reviews.spot)
     const spotReviewUser = Object?.values(spotReview)
 
@@ -45,11 +45,11 @@ function AddReview() {
           let createdReview = await dispatch(createReviewThunk(payload)).catch(
             async (res) => {
               const data = await res.json();
-              console.log("this is my data", data);
+              // console.log("this is my data", data);
               if (data && data.errors) setErrors(data.errors);
             }
           );
-          console.log("this is createdReview", createdReview);
+          // console.log("this is createdReview", createdReview);
 
           if (createdReview) {
             history.push(`/spots/${spotId}`);

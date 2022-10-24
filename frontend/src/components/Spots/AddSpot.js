@@ -77,7 +77,7 @@ function AddSpot() {
           dispatch(addSpotImgThunk(imgPayload, createdSpot.id))
             history.push('/')
         }
-        console.log("this is a created spot", createdSpot)
+        // console.log("this is a created spot", createdSpot)
 
         // reset form state
         setAddress("")

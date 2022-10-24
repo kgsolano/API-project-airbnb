@@ -34,7 +34,7 @@ function User() {
     const reviewsObj = useSelector((state) => state.reviews.user)
     if(!reviewsObj) return null
     const reviews = Object.values(reviewsObj)
-    console.log('this is reviews ---->', reviews)
+    // console.log('this is reviews ---->', reviews)
 
 
   return (
