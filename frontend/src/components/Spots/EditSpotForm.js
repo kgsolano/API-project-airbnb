@@ -77,29 +77,29 @@ function EditSpotForm() {
         <h1>Edit a Spot!</h1>
         <input
           type="text"
-          placeholder="Address"
-          value={spot?.address}
+          placeholder={spot?.address}
+          value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
         <br />
         <input
           type="text"
-          placeholder="City"
-          value={spot?.city}
+          placeholder={spot?.city}
+          value={city}
           onChange={(e) => setCity(e.target.value)}
         />
         <br />
         <input
           type="text"
-          placeholder="State"
-          value={spot?.state}
+          placeholder={spot?.state}
+          value={state}
           onChange={(e) => setState(e.target.value)}
         />
         <br />
         <input
           type="text"
-          placeholder="Country"
-          value={spot?.country}
+          placeholder={spot?.country}
+          value={country}
           onChange={(e) => setCountry(e.target.value)}
         />
         <br />
@@ -119,22 +119,22 @@ function EditSpotForm() {
         <br /> */}
         <input
           type="text"
-          placeholder="Name"
-          value={spot?.name}
+          placeholder={spot?.name}
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <br />
         <input
           type="text"
-          placeholder="Description"
-          value={spot?.description}
+          placeholder={spot?.description}
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <br />
         <input
           type="text"
-          placeholder="Price"
-          value={spot?.price}
+          placeholder={spot?.price}
+          value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
         <br />
