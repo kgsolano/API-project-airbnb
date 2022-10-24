@@ -54,7 +54,7 @@ function EditSpotForm() {
          }
        );;
        if (updatedSpot) {
-         history.push(`/current`);
+         history.push(`/spots/${spotId}`);
        }
      };
 
