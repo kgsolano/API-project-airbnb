@@ -7,7 +7,7 @@ import './spots.css'
 const SpotBrowser = () => {
     const spotsObj = useSelector((state) => state.spots.allSpots)   // state/reducer/action.payload
     const spots = Object.values(spotsObj)
-    console.log("this is the spots variable", spots)
+    // console.log("this is the spots variable", spots)
     
 
     const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const SpotBrowser = () => {
 
 
     
-    console.log("this is the spotsObj ---->", spotsObj)
+    // console.log("this is the spotsObj ---->", spotsObj)
     if(!spotsObj) return null
 
     

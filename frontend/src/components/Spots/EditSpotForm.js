@@ -23,8 +23,8 @@ function EditSpotForm() {
      const [city, setCity] = useState(spot?.city);
      const [state, setState] = useState(spot?.state);
      const [country, setCountry] = useState(spot?.country);
-     const [lat, setLat] = useState('');
-     const [lng, setLng] = useState("");
+    //  const [lat, setLat] = useState('');
+    //  const [lng, setLng] = useState("");
      const [name, setName] = useState(spot?.name);
      const [description, setDescription] = useState(spot?.description);
      const [price, setPrice] = useState(spot?.price);
@@ -40,8 +40,6 @@ function EditSpotForm() {
          city,
          state,
          country,
-         lat,
-         lng,
          name,
          description,
          price,
@@ -52,9 +50,9 @@ function EditSpotForm() {
            const data = await res.json();
            if (data && data.errors) setErrors(data.errors);
          }
-       );;
+       );
        if (updatedSpot) {
-         history.push(`/spots/${spotId}`);
+         history.push(`/current`);
        }
      };
 
