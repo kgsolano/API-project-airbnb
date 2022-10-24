@@ -29,17 +29,19 @@ CastleBnB is an Airbnb fullstack application clone designed to mimic the functio
 
 ## Navigation
 
+### Signup/Login
 Please log in by either signing up, logging in, or logging in as a demo user. Once logged in you will be able to explore the site's full functionality for creating a listing, editing a listing, and/or managing reviews. Bookings are coming soon! 
 
-![image](https://user-images.githubusercontent.com/95837496/197423063-b2188225-aa5e-454c-b5f6-0c2dea46a10e.png)
 ![image](https://user-images.githubusercontent.com/95837496/197423098-114b8e29-8a48-44d4-9218-66f9f972f641.png)
 
+### Spots
 When logged in, you have the ability to create a new listing through the "Become a host" link. Simply fill out the form with the appropriate text and a proper url link to a picture of your spot to add to your listing to the splash page. In order to edit one of your listings, navigate to the "manage user" page to see all of your listings and you may edit or delete any of your listings as you please.
 
 ![image](https://user-images.githubusercontent.com/95837496/197423342-616ee565-8c42-45e8-9edd-17b15951a4ab.png)
 ![image](https://user-images.githubusercontent.com/95837496/197423197-1a72e886-ed37-4a27-80aa-b21a57117b11.png)
 ![image](https://user-images.githubusercontent.com/95837496/197423240-8888f9be-3ac2-4910-b12b-469887d956a9.png)
 
+### Reviews
 As a logged in user you also have the ability to see reviews for a listing as well as adding your own review to listings that are not your own. Be aware that you can only post one review per listing! If you decide that you want to change your review, you can delete your review through the "manage user" page and redo your review if necessary. 
 
 ![image](https://user-images.githubusercontent.com/95837496/197423208-7a1e0905-fd39-43a8-bc60-91968cdad895.png)
@@ -58,6 +60,10 @@ To clone this repo locally and access the website on your local machine please f
 * cd into the backend folder and run ```npm start``` - backend should be started and listening on port 8001
 * cd into the frontend folder and run ```npm start``` - frontend should be started and listening on port 3000
 * If there are issues starting the repo please ensure all the steps above have been followed.
+
+## Connect With Me
+
+linkedin - https://www.linkedin.com/in/kylesolano/
 
 ## API Routes Documentation
 
