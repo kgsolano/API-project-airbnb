@@ -34,7 +34,7 @@ router.delete("/:imageId", requireAuth, async (req, res, next) => {
         });
     }
 
-    console.log(spotImage.Spot.ownerId);
+    // console.log(spotImage.Spot.ownerId);
     if (req.user.id !== spotImage.Spot.ownerId){
         res.statusCode = 404
         return res.json("This spot does not belong to the current user")

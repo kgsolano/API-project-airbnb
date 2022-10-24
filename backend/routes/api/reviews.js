@@ -107,7 +107,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
     }
 
 
-    console.log(allReviews)
+    // console.log(allReviews)
 
     if(!reviewId) {
         res.statusCode = 404

@@ -135,7 +135,7 @@ router.delete("/:bookingId", requireAuth, async (req, res, next) => {
     statusCode: 404,
   });
  }
-  console.log(bookingId)
+  // console.log(bookingId)
 
   const spot = await Spot.findAll({
     where: {id: bookingId.spotId}
