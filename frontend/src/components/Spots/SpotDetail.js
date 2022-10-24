@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  useParams } from "react-router-dom";
-import { getOneSpot } from "../../store/spots";
+import { getAllSpots, getOneSpot } from "../../store/spots";
 import AddReview from "../Reviews/AddReview";
 import ReviewBrowser from "../Reviews/ReviewBrowser";
 import { getAllReviews } from "../../store/reviews";
 
 function SpotDetail() {
   const { spotId } = useParams();
-  const sessionUser = useSelector(state => state.session.user)
+  const sessionUser = useSelector(state => state?.session.user)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,11 +16,12 @@ function SpotDetail() {
     
     setTimeout(() => {
       dispatch(getOneSpot(spotId));
+      // dispatch(getAllSpots())
     }, 100)
   }, [dispatch, spotId]);
   
   // const reviewsObj = useSelector((state) => state.reviews.user);
-  const spot = useSelector((state) => state.spots.singleSpot);
+  const spot = useSelector((state) => state?.spots?.singleSpot);
   console.log(spot)
 
   // conditionally rendered spots
@@ -60,14 +61,14 @@ function SpotDetail() {
       </div>
       <div className="spot-photo-div">
         <img
-          src={spot?.SpotImages[0].url}
+          src={spot?.SpotImages[0]?.url}
           alt="spot-img"
           className="spot-photo"
         />
       </div>
       <div className="spot-description">
         <h2>
-          Entire Castle hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}
+          Entire Castle hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}
         </h2>
         <p>50 guests • 12 bedrooms • 15 beds • 10 bathrooms </p>
         <p>{spot?.description}</p>

@@ -28,9 +28,10 @@ export const addSpot = spot => ({
 })
 
 // add an image for a new spot
-export const addSpotImg = (image) => ({
+export const addSpotImg = (image, spotId) => ({
     type: ADD_IMG,
-    image
+    image,
+    spotId
 })
 
 // delete a spot
@@ -90,7 +91,7 @@ export const addSpotImgThunk = (formInfo, spotId) => async dispatch => {
 
     if(response.ok){
         const newImg = await response.json()
-        dispatch(addSpotImg(formInfo))
+        dispatch(addSpotImg(formInfo, spotId))
         return newImg
     }
 }
@@ -150,8 +151,9 @@ export default function SpotsReducer(state = initialState, action) {
             addState.allSpots[action.spot.id] = action.spot
             return addState
         case ADD_IMG:
-                const addImgState = {...state, allSpots: {...state.allSpots}}
-                addImgState.allSpots[action.image.id] = action.image
+                const addImgState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+                addImgState.allSpots[action.spotId].previewImage = action.image
+                addImgState.singleSpot.SpotImages[action.image.id] = action.image
                 return addImgState
         case DELETE:
             const deleteState = {...state, allSpots: {...state.allSpots}}
