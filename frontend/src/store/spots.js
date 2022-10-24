@@ -135,14 +135,14 @@ const initialState = {
 export default function SpotsReducer(state = initialState, action) {
     switch(action.type){
         case LOAD_ALL:
-            const loadAllState = {...state}
+            const loadAllState = {...state, singleSpot: {}}
             loadAllState.allSpots = {}
             action.allSpots.Spots.forEach((spot) => {   // key into Spots from backend
                 loadAllState.allSpots[spot.id] = spot     // this populates the allSpots in the empty object
             })
             return loadAllState
         case LOAD_ONE:
-            const loadOneState = {...state}
+            const loadOneState = {...state, singleSpot: {}}
             loadOneState.singleSpot = action.spot
             return loadOneState
         case ADD:

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteReviewThunk, getAllUserReviews } from '../../store/reviews';
+import { getAllSpots } from '../../store/spots';
 import UserReview from '../Reviews/UserReview';
 
 
@@ -13,6 +14,7 @@ function User() {
     
     useEffect(() => {
         dispatch(getAllUserReviews())
+        dispatch(getAllSpots())
         // console.log("is this working")
     }, [dispatch])
 
@@ -45,7 +47,7 @@ function User() {
           {filteredSpots.map((spot) => (
             <ul key={spot.id}>
               <img
-                src={spot.previewImage}
+                src={spot?.previewImage}
                 alt="castleImg"
                 className="user-img"
               />

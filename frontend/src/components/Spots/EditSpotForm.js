@@ -17,17 +17,20 @@ function EditSpotForm() {
         dispatch(getOneSpot(spotId))
     }, [dispatch, spotId])
 
+   
      // useState for the form values
-     const [address, setAddress] = useState(spot.address);
-     const [city, setCity] = useState(spot.city);
-     const [state, setState] = useState(spot.state);
-     const [country, setCountry] = useState(spot.country);
+     const [address, setAddress] = useState(spot?.address);
+     const [city, setCity] = useState(spot?.city);
+     const [state, setState] = useState(spot?.state);
+     const [country, setCountry] = useState(spot?.country);
      const [lat, setLat] = useState('');
      const [lng, setLng] = useState("");
-     const [name, setName] = useState(spot.name);
-     const [description, setDescription] = useState(spot.description);
-     const [price, setPrice] = useState(spot.price);
+     const [name, setName] = useState(spot?.name);
+     const [description, setDescription] = useState(spot?.description);
+     const [price, setPrice] = useState(spot?.price);
      const [errors, setErrors] = useState([])
+
+      if (!spot) return null;
 
      const handleSubmit = async (e) => {
        e.preventDefault();
@@ -75,28 +78,28 @@ function EditSpotForm() {
         <input
           type="text"
           placeholder="Address"
-          value={address}
+          value={spot?.address}
           onChange={(e) => setAddress(e.target.value)}
         />
         <br />
         <input
           type="text"
           placeholder="City"
-          value={city}
+          value={spot?.city}
           onChange={(e) => setCity(e.target.value)}
         />
         <br />
         <input
           type="text"
           placeholder="State"
-          value={state}
+          value={spot?.state}
           onChange={(e) => setState(e.target.value)}
         />
         <br />
         <input
           type="text"
           placeholder="Country"
-          value={country}
+          value={spot?.country}
           onChange={(e) => setCountry(e.target.value)}
         />
         <br />
@@ -117,28 +120,27 @@ function EditSpotForm() {
         <input
           type="text"
           placeholder="Name"
-          value={name}
+          value={spot?.name}
           onChange={(e) => setName(e.target.value)}
         />
         <br />
         <input
           type="text"
           placeholder="Description"
-          value={description}
+          value={spot?.description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <br />
         <input
           type="text"
           placeholder="Price"
-          value={price}
+          value={spot?.price}
           onChange={(e) => setPrice(e.target.value)}
         />
         <br />
-        <input type="submit" className="submit-btn">
-        </input>
+        <input type="submit" className="submit-btn"></input>
         <button type="button" onClick={handleDelete} className="submit-btn">
-          <p className='delete-text'>Delete this spot!</p>
+          <p className="delete-text">Delete this spot!</p>
         </button>
       </form>
     </section>

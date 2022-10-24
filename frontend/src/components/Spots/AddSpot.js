@@ -37,7 +37,11 @@ function AddSpot() {
       if (!name.length) errors.push("Please enter a valid name")
       if (!description.length) errors.push("Description cannot be empty")
       if (!price.match(/^\d+/)) errors.push("Price should be a valid number"); 
-      if (!url.includes(".jpg", ".png", ".jpeg")) errors.push("Please enter a valid url")
+       if (!/^https?:\/\/.+\.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(url)) {
+         errors.push(
+           "Url must be end with a valid .jpg, .png, or .jpeg"
+         );
+       }
 
       setValidationErrors(errors);
     }, [address, city, state, country, name, description, price, url])
