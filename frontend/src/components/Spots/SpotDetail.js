@@ -52,25 +52,25 @@ function SpotDetail() {
   return (
     <div className="spot-detail-page">
       <div className="spot-title">
-        <h1>{spot.name}</h1>
+        <h1>{spot?.name}</h1>
         <p>
           {spot?.avgStarRating} <i className="fa-sharp fa-solid fa-star"></i> •{" "}
-          {spot?.numReviews} reviews • {spot.city}, {spot.state}
+          {spot?.numReviews} reviews • {spot?.city}, {spot?.state}
         </p>
       </div>
       <div className="spot-photo-div">
         <img
-          src={spot.SpotImages[0].url}
+          src={spot?.SpotImages[0].url}
           alt="spot-img"
           className="spot-photo"
         />
       </div>
       <div className="spot-description">
         <h2>
-          Entire Castle hosted by {spot.Owner.firstName} {spot.Owner.lastName}
+          Entire Castle hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}
         </h2>
         <p>50 guests • 12 bedrooms • 15 beds • 10 bathrooms </p>
-        <p>{spot.description}</p>
+        <p>{spot?.description}</p>
       </div>
       {sessionUser && 
       <div className="reviews">
