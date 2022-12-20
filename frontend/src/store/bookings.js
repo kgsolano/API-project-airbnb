@@ -34,7 +34,7 @@ export const loadBookingsThunk = () => async dispatch  => {
 
     if(response.ok){
         const data = await response.json()
-        dispatch(loadBookings(data))
+        dispatch(loadBookings(data.Bookings))
         return data;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -51,7 +51,7 @@ export const getBookingThunk = (spotId) => async (dispatch) => {
 
     if (response.ok) {
       const data = await response.json();
-      dispatch(getBooking(data.booking)); // check postman. data.booking???
+      dispatch(getBooking(data.bookings)); // check postman. data.booking???
       return data.booking;
     } else if (response.status < 500) {
       const data = await response.json();
@@ -124,4 +124,57 @@ export const removeBookingThunk = (bookingId) => async (dispatch) => {
     } else {
       return ["An error occurred. Please try again."];
     }
+}
+
+// REDUCER 
+const initialState = { allBookings: {}, currentBooking: {} };
+export default function BookingReducer(state = initialState, action) {
+  switch (action.type) {
+    case LOAD_BOOKINGS:
+      const allBookings = normalizeArray(action.bookings.Bookings);
+      return { ...state, allBookings: { ...allBookings } };
+    case GET_BOOKING:
+      const currentBooking = {
+        allBookings: { ...state.allBookings },
+        currentBooking: { ...action.booking.bookings },
+      };
+      return currentBooking;
+    case ADD_BOOKING:
+      if (!state[action.booking.id]) {
+        const newState = {
+          ...state,
+          allBookings: {
+            ...state.allBookings,
+            [action.booking.id]: action.booking,
+          },
+        };
+        return newState;
+      }
+      return {
+        ...state,
+        allBookings: {
+          ...state.allBookings,
+          [action.booking.id]: {
+            ...state[action.booking.id],
+            ...action.booking,
+          },
+        },
+      };
+    case REMOVE_BOOKING:
+      const deleteState = { ...state };
+      delete deleteState.allBookings[action.bookingId];
+      return deleteState;
+    default:
+      return state;
+  }
+}
+//HELPERS
+function normalizeArray(dataArray) {
+  if (!dataArray instanceof Array)
+    throw new Error("Normalize problem: data invalid");
+  const obj = {};
+  dataArray.forEach((element) => {
+    obj[element.id] = element;
+  });
+  return obj;
 }
