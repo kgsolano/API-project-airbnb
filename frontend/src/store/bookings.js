@@ -62,3 +62,66 @@ export const getBookingThunk = (spotId) => async (dispatch) => {
       }
     }
 }
+
+export const addBookingThunk = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(spotId)
+    })
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(addBooking(data));
+      return data;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data) {
+        return data;
+      }
+    } else {
+      return ["An error occurred. Please try again."];
+    }
+}
+
+export const updateBookingThunk = (bookingId, booking) => async (dispatch) => {
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(booking)
+    })
+
+    if (response.ok) {
+      const data = await response.json();
+    //   if (data.errors) {
+    //     return data;
+    //   }                 PUT IN IF ADDING ERRORS ON BACKEND
+      dispatch(addBooking(data));
+      return data;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data) {
+        return data;
+      }
+    } else {
+      return ["An error occurred. Please try again."];
+    }
+}
+
+export const removeBookingThunk = (bookingId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+        method: "DELETE"
+    })
+
+    if (response.ok) {
+      await dispatch(removeBooking(bookingId));
+      return;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again."];
+    }
+}
