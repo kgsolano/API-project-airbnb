@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom';
+import { loadBookingsThunk } from '../../store/bookings';
 import { deleteReviewThunk, getAllUserReviews } from '../../store/reviews';
 import { getAllSpots } from '../../store/spots';
+import BookingIndex from '../bookings/bookingIndex';
 import UserReview from '../Reviews/UserReview';
 
 
@@ -15,11 +17,16 @@ function User() {
     useEffect(() => {
         dispatch(getAllUserReviews())
         dispatch(getAllSpots())
+        dispatch(loadBookingsThunk())
         // console.log("is this working")
     }, [dispatch])
 
     const spots = useSelector((state) => Object.values(state.spots.allSpots));
     const sessionUser = useSelector(state => state.session.user)
+    const bookingsObjState = useSelector(state => state.bookings)
+    const bookingsObj = bookingsObjState.allBookings
+    const bookings = Object.values(bookingsObj)
+    console.log("this is bookings ----------",bookings)
 
     // console.log("this is session user --", sessionUser)
     // console.log("this is the all the spots --->", spots)
@@ -35,6 +42,9 @@ function User() {
     if(!reviewsObj) return null
     const reviews = Object.values(reviewsObj)
     // console.log('this is reviews ---->', reviews)
+
+    // const bookingsObj = useSelector(state => state.bookings)
+    // console.log(bookingsObj)
 
 
   return (
@@ -68,6 +78,12 @@ function User() {
         ))}
       </ul>
     }
+    <h2>Your Trips</h2>
+    <ul className='user-bookings'>
+      {bookings.map((booking) => (
+        <li><BookingIndex booking={booking} /></li>
+      ))}
+    </ul>
     </div>
   );
 }

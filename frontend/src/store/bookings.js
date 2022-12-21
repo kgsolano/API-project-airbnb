@@ -131,7 +131,7 @@ const initialState = { allBookings: {}, currentBooking: {} };
 export default function BookingReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_BOOKINGS:
-      const allBookings = normalizeArray(action.bookings.Bookings);
+      const allBookings = normalizeArray(action.bookings);
       return { ...state, allBookings: { ...allBookings } };
     case GET_BOOKING:
       const currentBooking = {

@@ -246,3 +246,8 @@ login-modal-div {
     color: #a1454c;
     align-self: center;
 }
+
+.booking-img {
+    height: 80px;
+    width: 80px;
+}
