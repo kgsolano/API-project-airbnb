@@ -63,11 +63,11 @@ export const getBookingThunk = (spotId) => async (dispatch) => {
     }
 }
 
-export const addBookingThunk = (spotId) => async (dispatch) => {
+export const addBookingThunk = (spotId, booking) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(spotId)
+        body: JSON.stringify(booking)
     })
 
     if (response.ok) {
