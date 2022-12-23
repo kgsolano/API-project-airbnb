@@ -11,6 +11,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 const { check } = require("express-validator");
 const { user } = require("pg/lib/defaults");
 const review = require("../../db/models/review");
+const { singleMulterUpload, singlePublicFileUpload } = require("../../awsS3");
 
 const validateReview = [
   check("review")
@@ -90,15 +91,16 @@ router.put("/:reviewId", requireAuth, validateReview, async (req, res, next) => 
 });
 
 // add an image to a review
-router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
+router.post("/:reviewId/images", singleMulterUpload("image"), requireAuth, async (req, res, next) => {
 
     const reviewId = await Review.findByPk(req.params.reviewId)
+    const reviewImageUrl = await singlePublicFileUpload(req.file)
 
     const allReviews = await ReviewImage.count({
         where: {reviewId: req.params.reviewId}
     })
 
-    if(allReviews >= 10){
+    if(allReviews >= 3){
         res.statusCode = 403
         res.json({
           message: "Maximum number of images for this resource was reached",
@@ -122,7 +124,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
     
         const newReviewImg = await ReviewImage.create({
             reviewId: reviewId.id,
-            url
+            url: reviewImageUrl,
         })
 
          const resWithoutDates = await ReviewImage.findByPk(newReviewImg.id, {
