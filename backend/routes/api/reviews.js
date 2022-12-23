@@ -66,6 +66,15 @@ router.get("/current", requireAuth, async (req, res, next) => {
     res.json({Reviews: reviews})
 })
 
+// Get a review image
+router.get("/:reviewId/reviewImg", requireAuth, async (req, res) => {
+  const reviewImg = await ReviewImage.findOne({
+    where: {reviewId: req.params.reviewId}
+  });
+
+  res.json(reviewImg)
+})
+
 // Edit a review
 router.put("/:reviewId", requireAuth, validateReview, async (req, res, next) => {
   const editedReview = await Review.scope("includeEdits").findByPk(req.params.reviewId);
