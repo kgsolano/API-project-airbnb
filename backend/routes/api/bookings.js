@@ -122,48 +122,38 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
 })
 
 router.delete("/:bookingId", requireAuth, async (req, res, next) => {
-  const bookingId = await Booking.findByPk(req.params.bookingId, {
-    include: [
-      {model: Spot},
-      {model: User}
-    ]
-  })
- if(!bookingId){
-  res.statusCode = 404
-  return res.json({
-    message: "Booking couldn't be found",
-    statusCode: 404,
-  });
- }
-  // console.log(bookingId)
+  const userId = req.user.id;
+  const booking = await Booking.findByPk(req.params.bookingId);
+  let currentDate = new Date();
 
-  const spot = await Spot.findAll({
-    where: {id: bookingId.spotId}
-  })
-
-  const currentDate = new Date()
-  if(bookingId.userId !== req.user.id || bookingId.spotId !== spot[0].ownerId){
-    res.statusCode = 404
-    res.json({
-      message: "Booking couldn't be found",
-      statusCode: 404,
-    });
-  } else if (currentDate >= bookingId.startDate && currentDate <= bookingId.endDate){
-    res.statusCode = 403
-    res.json({
-      message: "Bookings that have been started can't be deleted",
-      statusCode: 403,
-    });
+  if (!booking) {
+    const err = new Error("Booking couldn't be found");
+    err.status = 404;
+    return next(err);
   } else {
-
-    bookingId.destroy()
-
-    res.json({
-      message: "Successfully deleted",
-      statusCode: 200,
-    });
+    let spot = await booking.getSpot();
+    if (booking.userId !== userId && spot.ownerId !== userId) {
+      const err = new Error(
+        "Booking must belong to user or Spot must be owned by user"
+      );
+      err.status = 403;
+      return next(err);
+    } else if (
+      booking.startDate <= currentDate &&
+      booking.endDate >= currentDate
+    ) {
+      const err = new Error("Bookings that have been started can't be deleted");
+      err.status = 403;
+      return next(err);
+    } else {
+      await booking.destroy();
+      res.json({
+        message: "Successfully deleted",
+        statusCode: 200,
+      });
+    }
   }
-})
+});
 
 
 
