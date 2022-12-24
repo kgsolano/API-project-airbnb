@@ -103,13 +103,13 @@ router.put("/:reviewId", requireAuth, validateReview, async (req, res, next) => 
 router.post("/:reviewId/images", singleMulterUpload("image"), requireAuth, async (req, res, next) => {
 
     const reviewId = await Review.findByPk(req.params.reviewId)
-    const reviewImageUrl = await singlePublicFileUpload(req.file)
+    const reviewImageUrl = await singlePublicFileUpload(req.file);
 
     const allReviews = await ReviewImage.count({
         where: {reviewId: req.params.reviewId}
     })
 
-    if(allReviews >= 3){
+    if(allReviews >= 2){
         res.statusCode = 403
         res.json({
           message: "Maximum number of images for this resource was reached",
@@ -129,18 +129,18 @@ router.post("/:reviewId/images", singleMulterUpload("image"), requireAuth, async
     }
 
     if(req.user.id){
-        const { url } = req.body
+        // const { url } = req.body
     
         const newReviewImg = await ReviewImage.create({
             reviewId: reviewId.id,
             url: reviewImageUrl,
         })
 
-         const resWithoutDates = await ReviewImage.findByPk(newReviewImg.id, {
+         const resWithoutDates = await ReviewImage.findByPk(newReviewImg.reviewId, {
             attributes: ['id', 'url']
          });
     
-        res.json(resWithoutDates)
+        return res.json(resWithoutDates)
     }
 })
 

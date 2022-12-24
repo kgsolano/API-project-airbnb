@@ -47,7 +47,7 @@ export const loadReviewImagesThunk = (reviewId) => async dispatch => {
     }
 }
 
-export const addReviewImageThunk = (reviewId, imgUrl, form) => async dispatch => {
+export const addReviewImageThunk = (reviewId, imgUrl) => async dispatch => {
     const formData = new FormData();
     const image = imgUrl
 
@@ -55,14 +55,14 @@ export const addReviewImageThunk = (reviewId, imgUrl, form) => async dispatch =>
 
     const response = await csrfFetch(`/api/reviews/${reviewId}/images`, {
         method: "POST",
-        headers: {"Content-Type": "multipart/form-data"},
-        body: formData
+        headers: {"Content-Type": "multipart/form-data",},
+        body: formData,
     })
 
     if(response.ok){
         const data = await response.json()
         dispatch(addReviewImage(reviewId, data))
-    }
+    } 
 }
 
 export const deleteReviewImageThunk = (imageId) => async dispatch => {
@@ -92,8 +92,8 @@ export default function ReviewImageReducer(state = initialState, action){
             const reviewImages = normalizeArray(action.reviewImage);
             return {...state, reviewImages: {reviewImages}}
         case ADD_REVIEW_IMG:
-            const addReviewImageState = {...state, reviewImages: {...state.reviewImages}}
-            addReviewImageState.reviewImages[action.reviewId].url = action.reviewImage
+            const addReviewImageState = {...state}
+            addReviewImageState.reviewImages[action.reviewId] = action.reviewImage
             return addReviewImageState
         case DELETE_REVIEW_IMG:
             const deleteState = {...state}
