@@ -100,11 +100,44 @@ function SpotDetail() {
         />
       </div>
       <div className="spot-description">
-        <h2>
-          Entire Castle hosted by {spot?.Owner?.firstName}{" "}
-          {spot?.Owner?.lastName}
-        </h2>
-        <p>50 guests • 12 bedrooms • 15 beds • 10 bathrooms </p>
+        <div className="spot-title-area">
+          <div className="spot-title-text">
+            <h3 className="spot-description-title">
+              Entire Castle hosted by {spot?.Owner?.firstName}{" "}
+              {spot?.Owner?.lastName}
+            </h3>
+            <p>50 guests • 12 bedrooms • 15 beds • 10 bathrooms </p>
+          </div>
+          <i className="fas fa-user-circle spot-profile-pic" />
+        </div>
+        <div className="spot-information-div">
+          <div className="info-div">
+            <i class="fa-solid fa-door-open spot-icon" />
+            <div className="info-text-div">
+              <h4>Self check-in</h4>
+              <p className="info-text">Check yourself in with the keypad.</p>
+            </div>
+          </div>
+          <div className="info-div">
+            <i class="fa-solid fa-medal spot-icon" />
+            <div className="info-text-div">
+              <h4>{spot?.Owner?.firstName} is a Superhost</h4>
+              <p className="info-text">
+                Superhosts are experienced, highly rated hosts who are committed
+                to providing great stays for guests.
+              </p>
+            </div>
+          </div>
+          <div className="info-div">
+            <i class="fa-solid fa-location-dot spot-icon" />
+            <div className="info-text-div">
+              <h4>Great location</h4>
+              <p className="info-text">
+                90% of recent guests gave the location a 5-star rating.
+              </p>
+            </div>
+          </div>
+        </div>
         <p>{spot?.description}</p>
       </div>
       <div className="bookings-card-div">
@@ -118,30 +151,20 @@ function SpotDetail() {
         <div className="dates-form-container">
           <form className="dates-form" onSubmit={handleSubmit}>
             <label>
-              CHECK-IN 
-              <input
-                type="date"
-                value={startDate}
-                onChange={updateStartDate}
-                />
+              CHECK-IN
+              <input type="date" value={startDate} onChange={updateStartDate} />
             </label>
             <label>
               CHECK-OUT
-              <input
-                type="date"
-                value={endDate}
-                onChange={updateEndDate}
-                />
+              <input type="date" value={endDate} onChange={updateEndDate} />
             </label>
-          {sessionUser &&
-          <button type='submit'>Book Stay</button>
-          }
+            {sessionUser && <button type="submit">Book Stay</button>}
           </form>
         </div>
       </div>
       {sessionUser && (
         <div className="reviews">
-          <ReviewBrowser spotId={spotId} />
+          <ReviewBrowser spotId={spotId} spot={spot} />
           <h4>
             <AddReview />
           </h4>

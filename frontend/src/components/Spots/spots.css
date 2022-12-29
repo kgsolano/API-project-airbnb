@@ -92,8 +92,35 @@
     width: 80%;
 }
 
+.spot-title-area {
+    /* border: 1px solid red; */
+    border-bottom: solid #eeeeee;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+/* .spot-title-text {
+    border: 1px solid yellow;
+} */
+
+.spot-description-title {
+    font-weight: 1000;
+    /* border: 1px solid red; */
+    font-size: 1.5rem;
+}
+
+.spot-profile-pic {
+    /* border: 1px solid red; */
+    font-size: 50px;
+    /* TRY AGAIN LATER */
+}
+
 .spot-detail-page {
-    width: 65%;
+    width: 80%;
 }
 
 .spot-description > h2 {
@@ -107,6 +134,38 @@
 .spot-description {
     padding: 20px 0;
     border-bottom: 1px solid grey;
+}
+
+.spot-information-div {
+    /* border: 1px solid red; */
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-div {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.info-text-div {
+    margin: 20px;
+}
+
+.info-text-div > h4{
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.info-text-div > p {
+    margin: 0;   
+    color: #797979;
+}
+
+.spot-icon {
+    font-size: 1.5rem;
 }
 
 /* ADD A SPOT FORM */

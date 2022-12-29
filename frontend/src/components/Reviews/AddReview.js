@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
-import { addReviewImageThunk } from '../../store/reviewImages'
 import { createReviewThunk, getAllReviews, getAllUserReviews } from '../../store/reviews'
 import { getOneSpot } from '../../store/spots'
 
@@ -11,25 +10,22 @@ function AddReview() {
     const {spotId} = useParams()
     const user = useSelector((state) => state.session.user)
     const spotOwner = useSelector(state => state.spots.singleSpot.ownerId)
+    // console.log('this is spotOwner --->', spotOwner )
     const spotReview = useSelector((state) => state.reviews.spot)
     const spotReviewUser = Object?.values(spotReview)
-    console.log('this is spotreivew --->', spotReview )
 
 
     const [review, setReview] = useState('')
     const [rating, setRating] = useState('')
     const [errors, setErrors] = useState([])
-    const [img, setImg] = useState(null)
 
-    const updateFile = (e) => {
-      const file = e.target.files[0];
-      if (file) setImg(file);
-    };
+    // useEffect(() => {
+    // dispatch(getAllUserReviews());
+    // }, [dispatch])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("this is img", img)
 
       
 
@@ -37,8 +33,7 @@ function AddReview() {
             spotId,
             userId: user.id,
             review,
-            stars: rating,
-            // ReviewImages: {}
+            stars: rating
         }
         // console.log('this is the conditional', !(user?.id === spotReviewUser[0]?.User.id));
 
@@ -47,21 +42,17 @@ function AddReview() {
         if (
           !(user?.id === spotReviewUser[0]?.User?.id)) {
           setErrors([]);
-          let createdReview = await dispatch(createReviewThunk(payload))
-          // .catch(
-          //   async (res) => {
-          //     const data = await res.json();
-          //     // console.log("this is my data", data);
-          //     if (data && data.errors) setErrors(data.errors);
-          //   }
-          // );
+          let createdReview = await dispatch(createReviewThunk(payload)).catch(
+            async (res) => {
+              const data = await res.json();
+              // console.log("this is my data", data);
+              if (data && data.errors) setErrors(data.errors);
+            }
+          );
           // console.log("this is createdReview", createdReview);
 
           if (createdReview) {
-            // const form = document.getElementsByClassName("review-form-div");
-            // console.log("this is the form-------",form)
-            dispatch(addReviewImageThunk(createdReview.id, img))
-            // history.push(`/spots/${spotId}`);
+            history.push(`/spots/${spotId}`);
             dispatch(getAllReviews(spotId));
             dispatch(getOneSpot(spotId))
           }
@@ -107,10 +98,6 @@ function AddReview() {
               <i className="fa-sharp fa-solid fa-star"></i>
               <br />
               <input type="submit" className="rating-submit" />
-              <label htmlFor="file-upload" className="spot-upload-label">
-                Upload a photo (optional)
-                <input id="file-upload" type="file" onChange={updateFile} />
-              </label>
             </form>
           </section>
         </>
