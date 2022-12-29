@@ -10,6 +10,8 @@ const { User, Spot, Review, SpotImage, ReviewImage, Booking, sequelize } = requi
 const { handleValidationErrors } = require("../../utils/validation");
 const { check } = require("express-validator");
 const { user } = require("pg/lib/defaults");
+const { urlencoded } = require("express");
+const { singleMulterUpload, singlePublicFileUpload } = require("../../awsS3");
 
 const validateResponse = [
   check("address")
@@ -527,8 +529,9 @@ router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res, ne
 })
 
 //create an image for a spot
-router.post("/:spotId/images", requireAuth, async (req, res, next) => {
+router.post("/:spotId/images", singleMulterUpload("image"),requireAuth, async (req, res, next) => {
   const { url, preview } = req.body
+  const imageUrl = await singlePublicFileUpload(req.file)
   const spot = await Spot.findByPk(req.params.spotId)
 
   // console.log(spot)
@@ -547,7 +550,9 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
     } else {
 
     const newImage = await SpotImage.create({
-      spotId: spot.id, url, preview
+      spotId: spot.id, 
+      url: imageUrl, 
+      preview: true
     })
 
     const resWithoutDates = await SpotImage.findByPk(newImage.id, {

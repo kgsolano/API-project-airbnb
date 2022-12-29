@@ -20,7 +20,7 @@ function AddSpot() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
-    const [url, setUrl] = useState('')
+    const [url, setUrl] = useState(null)
     const [errors, setErrors] = useState([])
     const [validationErrors, setValidationErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
@@ -37,16 +37,16 @@ function AddSpot() {
       if (!name.length) errors.push("Please enter a valid name")
       if (!description.length) errors.push("Description cannot be empty")
       if (!price.match(/^\d+/)) errors.push("Price should be a valid number"); 
-       if (!/^https?:\/\/.+\.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(url)) {
-         errors.push(
-           "Url must be end with a valid .jpg, .png, or .jpeg"
-         );
-       }
+      //  if (!/^https?:\/\/.+\.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(url)) {
+      //    errors.push(
+      //      "Url must be end with a valid .jpg, .png, or .jpeg"
+      //    );
+      //  }
 
       setValidationErrors(errors);
     }, [address, city, state, country, name, description, price, url])
 
-
+ console.log("this is url", url);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -64,19 +64,39 @@ function AddSpot() {
             description,
             price
         }
+       
+        // const imgPayload = {
+        //   url,
+        //   preview: true
+        // }
 
-        const imgPayload = {
-          url,
-          preview: true
-        }
+                if (url) {
+                  let createdSpot = await dispatch(addSpotThunk(payload)).catch(
+                    async (res) => {
+                      
+                      const data = await res.json();
+                      if (data && data.errors) {
+                        setErrors(data.errors);
+                      }
+                    }
+                  );
+                  if (createdSpot) {
+                    // const form = document.getElementById("form");
+                    dispatch(addSpotImgThunk(createdSpot.id, url));
+                    
+                    history.push(`/`);
+                  }
+                } else {
+                  setErrors(["Image Url is required"]);
+                }
 
-        let createdSpot = await dispatch(addSpotThunk(payload))
+        // let createdSpot = await dispatch(addSpotThunk(payload))
 
-        if (createdSpot) {
-          // dispatch new url thunk
-          dispatch(addSpotImgThunk(imgPayload, createdSpot.id))
-            history.push('/')
-        }
+        // if (createdSpot) {
+        //   // dispatch new url thunk
+        //   dispatch(addSpotImgThunk(imgPayload, createdSpot.id))
+        //     history.push('/')
+        // }
         // console.log("this is a created spot", createdSpot)
 
         // reset form state
@@ -92,6 +112,11 @@ function AddSpot() {
         setValidationErrors([])
         setHasSubmitted(false)
     }
+
+      const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setUrl(file);
+      };
   return (
     <section className="add-spot-form-div">
       {hasSubmitted && !!validationErrors.length && (
@@ -104,7 +129,7 @@ function AddSpot() {
           </ul>
         </div>
       )}
-      <form onSubmit={handleSubmit} className="add-spot-form">
+      <form onSubmit={handleSubmit} className="add-spot-form" id="form">
         <h1>Add a Spot!</h1>
         <input
           type="text"
@@ -169,12 +194,10 @@ function AddSpot() {
           onChange={(e) => setPrice(e.target.value)}
         />
         <br />
-        <input
-          type="text"
-          placeholder="URL"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
+        <label htmlFor="file-upload" className="spot-upload-label">
+          Add an image for your listing:  
+          <input id="file-upload" type="file" onChange={updateFile} />
+        </label>
         <input type="submit" value="Create new spot" className="submit-btn" />
       </form>
     </section>

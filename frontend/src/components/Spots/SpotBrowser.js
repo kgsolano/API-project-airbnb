@@ -36,7 +36,7 @@ const SpotBrowser = () => {
             >
               <div className="spot-card">
                 <img
-                  src={spot.previewImage}
+                  src={spot?.previewImage}
                   alt="castleImg"
                   className="spot-img"
                 ></img>

@@ -82,16 +82,23 @@ export const addSpotThunk = (formInfo) => async dispatch => {
 }
 
 //add a url for a new spot thunk
-export const addSpotImgThunk = (formInfo, spotId) => async dispatch => {
+export const addSpotImgThunk = (spotId, imgUrl, form) => async dispatch => {
+    const formData = new FormData();
+    const image = imgUrl
+    console.log("form data------", formData)
+
+    formData.append("image", image)
     const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(formInfo)
+      method: "POST",
+      headers: { "Content-Type": "multipart/form-data" },
+      body: formData,
+      // headers: {"Content-Type": "application/json"},
+      // body: JSON.stringify(formInfo)
     });
 
     if(response.ok){
         const newImg = await response.json()
-        dispatch(addSpotImg(formInfo, spotId))
+        dispatch(addSpotImg(newImg, spotId))
         return newImg
     }
 }
@@ -152,8 +159,8 @@ export default function SpotsReducer(state = initialState, action) {
             return addState
         case ADD_IMG:
                 const addImgState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
-                addImgState.allSpots[action.spotId].previewImage = action.image
-                addImgState.singleSpot.SpotImages[action.image.id] = action.image
+                addImgState.allSpots[action.spotId].previewImage = action.image.url
+                // addImgState.singleSpot.SpotImages[action.image.id] = action.image
                 return addImgState
         case DELETE:
             const deleteState = {...state, allSpots: {...state.allSpots}}
