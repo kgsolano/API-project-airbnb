@@ -7,6 +7,7 @@ import ReviewsReducer from "./reviews";
 import sessionReducer from "./session";
 import SpotsReducer from "./spots";
 
+
 const rootReducer = combineReducers({
     session: sessionReducer,
     spots: SpotsReducer,
