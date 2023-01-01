@@ -115,7 +115,7 @@
 
 .spot-profile-pic {
     /* border: 1px solid red; */
-    font-size: 50px;
+    font-size: 3.3rem !important;
     /* TRY AGAIN LATER */
 }
 
@@ -127,8 +127,8 @@
     margin: 10px 0;
 }
 
-.spot-description> p {
-    font-size: 14px;
+.spot-description-text-div {
+    font-size: 1rem;
 }
 
 .spot-description {
@@ -168,6 +168,50 @@
     font-size: 1.75rem;
 }
 
+.info-booking-parent {
+    display: flex;
+    flex-direction: row;
+}
+
+.bookings-card-div {
+    border: 1px solid hsla(0, 0%, 82.7%, .6);
+    border-radius: 15px;
+    box-shadow: 0 6px 16px rgb(0 0 0 / 12%);
+    width: 35%;
+    margin: 5%;
+    padding: 24px;
+}
+
+.spot-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-price {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+.price-text {
+    font-size: 1.3rem !important;
+    font-weight: 900 !important;
+}
+
+.review-info-header {
+    margin: 10px 0;
+}
+
+.dates-form {
+    /* border: 1px solid #d7d7d7; */
+    display: flex;
+    flex-direction: row;
+}
+
+.date-input {
+    border: 1px solid #d7d7d7;
+    padding: 15px;
+}
 /* ADD A SPOT FORM */
 
 .add-spot-form-div {

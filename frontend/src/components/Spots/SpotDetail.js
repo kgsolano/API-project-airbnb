@@ -110,58 +110,68 @@ function SpotDetail() {
           </div>
           <i className="fas fa-user-circle spot-profile-pic" />
         </div>
-        <div className="spot-information-div">
-          <div className="info-div">
-            <i class="fa-solid fa-door-open spot-icon" />
-            <div className="info-text-div">
-              <h4>Self check-in</h4>
-              <p className="info-text">Check yourself in with the keypad.</p>
+        <div className="info-booking-parent">
+          <div className="spot-information-div">
+            <div className="info-div">
+              <i class="fa-solid fa-door-open spot-icon" />
+              <div className="info-text-div">
+                <h4>Self check-in</h4>
+                <p className="info-text">Check yourself in with the keypad.</p>
+              </div>
             </div>
-          </div>
-          <div className="info-div">
-            <i class="fa-solid fa-medal spot-icon" />
-            <div className="info-text-div">
-              <h4>{spot?.Owner?.firstName} is a Superhost</h4>
-              <p className="info-text">
-                Superhosts are experienced, highly rated hosts who are committed
-                to providing great stays for guests.
-              </p>
+            <div className="info-div">
+              <i class="fa-solid fa-medal spot-icon" />
+              <div className="info-text-div">
+                <h4>{spot?.Owner?.firstName} is a Superhost</h4>
+                <p className="info-text">
+                  Superhosts are experienced, highly rated hosts who are
+                  committed to providing great stays for guests.
+                </p>
+              </div>
             </div>
+            <div className="info-div">
+              <i class="fa-solid fa-location-dot spot-icon" />
+              <div className="info-text-div">
+                <h4>Great location</h4>
+                <p className="info-text">
+                  90% of recent guests gave the location a 5-star rating.
+                </p>
+              </div>
+            </div>
+            <p className="spot-description-text-div">{spot?.description}</p>
           </div>
-          <div className="info-div">
-            <i class="fa-solid fa-location-dot spot-icon" />
-            <div className="info-text-div">
-              <h4>Great location</h4>
-              <p className="info-text">
-                90% of recent guests gave the location a 5-star rating.
-              </p>
+          <div className="bookings-card-div">
+            <div className="spot-info">
+              <h4 className="card-price">
+                <span className="price-text">${spot.price}</span>
+                /night
+              </h4>
+              <span className="review-info-header">
+                <i className="fa-sharp fa-solid fa-star"></i>
+                {spot?.avgStarRating} • {spot?.numReviews} reviews
+              </span>
+            </div>
+            <div className="dates-form-container">
+              <form className="dates-form" onSubmit={handleSubmit}>
+                <label className="date-input">
+                  CHECK-IN
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={updateStartDate}
+                  />
+                </label>
+                <label className="date-input">
+                  CHECK-OUT
+                  <input type="date" value={endDate} onChange={updateEndDate} />
+                </label>
+                {sessionUser && <button type="submit">Book Stay</button>}
+              </form>
             </div>
           </div>
         </div>
-        <p>{spot?.description}</p>
       </div>
-      <div className="bookings-card-div">
-        <div className="spot-info">
-          <h4>${spot.price}/night</h4>
-          <span className="review-info-header">
-            {spot?.avgStarRating} <i className="fa-sharp fa-solid fa-star"></i>
-            {spot?.numReviews} reviews
-          </span>
-        </div>
-        <div className="dates-form-container">
-          <form className="dates-form" onSubmit={handleSubmit}>
-            <label>
-              CHECK-IN
-              <input type="date" value={startDate} onChange={updateStartDate} />
-            </label>
-            <label>
-              CHECK-OUT
-              <input type="date" value={endDate} onChange={updateEndDate} />
-            </label>
-            {sessionUser && <button type="submit">Book Stay</button>}
-          </form>
-        </div>
-      </div>
+
       {sessionUser && (
         <div className="reviews">
           <ReviewBrowser spotId={spotId} spot={spot} />
