@@ -153,19 +153,21 @@ function SpotDetail() {
             </div>
             <div className="dates-form-container">
               <form className="dates-form" onSubmit={handleSubmit}>
-                <label className="date-input">
-                  CHECK-IN
-                  <input
-                    type="date"
-                    value={startDate}
-                    onChange={updateStartDate}
-                  />
-                </label>
-                <label className="date-input">
-                  CHECK-OUT
-                  <input type="date" value={endDate} onChange={updateEndDate} />
-                </label>
-                {sessionUser && <button type="submit">Book Stay</button>}
+                <div className="date-input-div">
+                  <label className="date-input check-in">
+                    CHECK-IN
+                    <input
+                      type="date"
+                      value={startDate}
+                      onChange={updateStartDate}
+                      />
+                  </label>
+                  <label className="date-input">
+                    CHECK-OUT
+                    <input type="date" value={endDate} onChange={updateEndDate} />
+                  </label>
+                </div>
+                {sessionUser && <button className="booking-btn" type="submit">Book Stay</button>}
               </form>
             </div>
           </div>
