@@ -1,12 +1,13 @@
 .nav-bar {
     /* border: 1px dashed green; */
-    border-bottom: 1px solid #a5a4a3;
-    height: 120px;
+    border-bottom: 1px solid #eeeeee;
+    height: 70px;
     viewport-fit: 100%;
     margin: 0;
     display: flex;
     justify-content: space-between;
     align-content: center;
+    align-items: center;
     flex-direction: row;
     width: 100%;
 }
@@ -63,62 +64,97 @@ login-modal-div {
 }
 
 .logo-btn {
-    width: 150px;
-    height: 120px;
+    width: 95px;
+    height: 70px;
     /* align-items: center; */
 }
 
-.profile-btn-div {
+/* .profile-btn-div {
     width: 400px;
-}
+} */
 
 .profile-btn {
-
-  height: 40%;
-   width: 7%;
-   padding: 0.5%;
+    /* border: 10px solid orange; */
+    position: relative;
+  height: 42px;
+   width: 72px;
+   padding: 0;
    border: 1px solid #a1454c;
    color: #a1454c;
-   border-radius: 40px;
+   border-radius: 20px;
    margin-right:50px;
-   margin-left: 15px;
    font-size: 40px;
-    align-self: center;
-    justify-self: self-end;
-    justify-content:space-between;
-    align-items: center;
-   background-color: white;
    display: flex;
    flex-direction: row-reverse;
-   cursor: pointer;
+   justify-content: space-between;
+   justify-items: center;
+    align-content: center !important;
+    align-items: center !important;
+    background-color: white;
+   /* cursor: pointer; */
+}
+
+.profile-icons {
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid green; */
+    align-content: center;
+    padding: 0 5px;
+}
+
+.profile-icons::before {
+    font-size: 1.5rem;
+    /* align-self: center; */
 }
 
 
+
+.fa-bars {
+    padding-left: 8px;
+    font-size: 1.5rem !important;
+}
 
 .profile-dropdown{
     position: absolute;
-    margin-left: 85%;
-    margin-top: 6%;
-    padding: 15px 10px;
+    /* margin-left: 85%;
+    margin-top: 6%; */
+    top: 50px;
+    padding: 10px 30px;
     background-color: white;
     border-radius: 4px;
-    box-shadow: 1px 2px 2px black;
-    
-    /* border: 1px solid red; */
+    border: 1px solid hsla(0, 0%, 82.7%, .6);
+    box-shadow: 0 6px 16px rgb(0 0 0 / 12%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
 }
 
-.manage-user-link:visited {
+.profile-dropdown > p {
+    color: black;
+    font-size: 10pt;
+    margin: 10px 0;
+}
+
+.manage-user-div {
+    font-size: 10pt;
+    padding: 10px 0 !important;
+}
+
+.manage-user-link {
+    color: #a1454c;
+}
+
+/* .manage-user-link:visited {
     text-decoration: none;
     color: black
-}
+} */
 
 .manage-user-link:active {
     text-decoration: none;
 }
 
-.manage-user-div {
-    padding: 0;
-}
+
 
 /* .manage-user-div:hover {
     background-color: #a1454c;
@@ -126,6 +162,7 @@ login-modal-div {
 
 .manage-user-link:hover {
     text-decoration: none;
+    /* width: 146px !important; */
     background-color: #a1454c;
     color: white;
 }
@@ -137,7 +174,7 @@ login-modal-div {
 .log-out-button {
     background-color: transparent;
     border-radius: 3px;
-    padding: 5px;
+    padding: 0;
     border: none;
     color: #a1454c;
     cursor: pointer;
@@ -155,17 +192,17 @@ login-modal-div {
 
 /* USER PAGE */
 
-.manage-user-div {
+/* .manage-user-div {
     height: 80%;
-    /* width: 80%; */
+    width: 80%;
     display: flex;
     flex-direction: column;
    
-}
+} */
 
-.manage-user-div > h2 {
+/* .manage-user-div > h2 {
     align-self: center;
-}
+} */
 
 .user-spots > ul {
     padding: 20px;

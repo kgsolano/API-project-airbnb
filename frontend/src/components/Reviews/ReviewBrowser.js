@@ -37,7 +37,7 @@ console.log('this is spotId -----', spotId)
           reviews.map((review) => (
             <ul key={review.id} className="review-id">
               <div className="review-heading-div">
-                <i className="fas fa-user-circle"></i>
+                <i className="fas fa-user-circle review-profile"></i>
                 <div className="review-heading-text">
                   <h3>{review.User?.firstName}</h3>
                   <h5>
