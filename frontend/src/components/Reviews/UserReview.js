@@ -19,16 +19,15 @@ function UserReview({review}) {
     }
   return (
     <div className="user-review-div">
-        <ul key={review.id}>
-          {review.Spot.name}: {review.review}
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="delete-review"
-          >
-            Delete this review
-          </button>
-        </ul>
+      <ul key={review.id} className="user-review-card">
+        <div className="user-review-content">
+          <h3>Review for {review.Spot.name}:</h3>
+          <p>{review.review}</p>
+        </div>
+        <button type="button" onClick={handleDelete} className="delete-review">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </ul>
     </div>
   );
 }
