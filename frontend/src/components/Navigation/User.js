@@ -58,9 +58,9 @@ function User() {
           <h2>Manage your Trips</h2>
           <ul className="user-bookings">
             {bookings.map((booking) => (
-              <li>
+              <div className='booking-card-div'>
                 <BookingIndex booking={booking} />
-              </li>
+              </div>
             ))}
           </ul>
         </div>
