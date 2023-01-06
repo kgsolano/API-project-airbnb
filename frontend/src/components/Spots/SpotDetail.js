@@ -56,7 +56,7 @@ function SpotDetail() {
     console.log("this is newbooking -----------",newBooking)
 
     if(newBooking){
-      history.push('/')
+      history.push('/current')
     }
   }
   
